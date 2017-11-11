@@ -166,15 +166,10 @@
 
         getCourseLink(this.items[index].tableName).then((response) => {
 
-          console.log("response start")
-          console.log(response)
-          console.log("response end")
-
           if (!response || response == "101") {
             this.showNoCourse = true;
             this.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
           } else {
-            this.shareCount = this.shareCount - 1;
             this.course.push(this.items[index].tableName)
             notifyCourse(this.course, this.objectId).then((response) => {
               this.notifyItems()
