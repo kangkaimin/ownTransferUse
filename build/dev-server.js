@@ -197,7 +197,10 @@ setInterval(function () {
 
 // serve pure static assets
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
-app.use(staticPath, express.static('./static'))
+// app.use(staticPath, express.static('./static'))
+
+//微信认证
+app.use(express.static('./static'))
 
 const uri = 'http://localhost:' + port
 
@@ -236,3 +239,4 @@ module.exports = {
     server.close()
   }
 }
+//MP_verify_t03vvYHChxaJS358.txt
