@@ -17,7 +17,7 @@ router.get('/getUserInfo', function (req, res) {
   axios.get(url, {
     headers: theHeaders,
   }).then((response) => {
-    console.log(response.data.results[0].course)
+
     res.json(response.data)
   }).catch((err) => {
     console.log(err)
@@ -29,7 +29,6 @@ router.get('/createUserInfo', function (req, res) {
 
   var url = 'https://api.bmob.cn/1/classes/H5User';
 
-  console.log(req.query)
 
   axios.post(url, {
     "userId": req.query.userId,
@@ -44,6 +43,7 @@ router.get('/createUserInfo', function (req, res) {
   })
 })
 
+// 分享的链接被打开
 router.get('/shareScuuess', function (req, res) {
 
   var url = 'https://api.bmob.cn/1/classes/H5User?where={"userId":"' + req.query.userId + '"}';
@@ -58,7 +58,6 @@ router.get('/shareScuuess', function (req, res) {
 
     var urlPut = 'https://api.bmob.cn/1/classes/H5User/' + response.data.results[0].objectId
 
-    console.log(response.data)
 
     axios.put(urlPut, {
       "shareCount": response.data.results[0].shareCount + 1
@@ -66,7 +65,6 @@ router.get('/shareScuuess', function (req, res) {
       headers: theHeaders,
     }).then((response) => {
 
-      console.log(response.data)
       res.send("success")
     })
   })
