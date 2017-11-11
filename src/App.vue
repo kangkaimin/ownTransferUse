@@ -10,7 +10,6 @@
   export default {
     name: 'app',
     created() {
-      alert("as :" + this.getUrlKey("id"))
       this.$router.push('/ad?id=123123')
       shareScuuess(this.getUrlKey("id"));
     },
