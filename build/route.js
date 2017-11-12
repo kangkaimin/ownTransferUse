@@ -74,7 +74,7 @@ router.get('/shareScuuess', function (req, res) {
 // 获取openid
 router.get('/getOpenId', function (req, res) {
 
-  console.log("getOpenId 0000000000000000 " + req.query.appId + "  " + req.query.appSecret + "  " + req.query.code)
+  console.log("getOpenId ------------------ " + req.query.appId + "  " + req.query.appSecret + "  " + req.query.code)
 
   var url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + req.query.appId + '&secret=' + req.query.appSecret + '&code=' + req.query.code + '&grant_type=authorization_code';
   axios.get(url).then((response) => {
@@ -84,16 +84,31 @@ router.get('/getOpenId', function (req, res) {
 
 })
 
-// 获取openid
+// getJsapiTicket
 router.get('/getJsapiTicket', function (req, res) {
 
-  console.log("getJsapiTicket 0000000000000000 " + req.query.access_token)
+  console.log("getJsapiTicket ------------------ " + req.query.access_token)
 
   var url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=' + req.query.access_token + '&type=jsapi';
   axios.get(url).then((response) => {
     console.log(response.data)
-    res.send(response.data)
+    // res.send(response.data)
   })
+
+  var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxb4d337ae696167c6&secret=4ecd990e4a9373110d2ea8bd2f85f7ea';
+  axios.get(url).then((response) => {
+    console.log("-----00---")
+    console.log(response.data)
+
+    var url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=' + response.data.access_token + '&type=jsapi';
+    axios.get(url).then((response) => {
+      console.log("-----22---")
+      console.log(response.data)
+      // res.send(response.data)
+    })
+  })
+
+
 
 })
 

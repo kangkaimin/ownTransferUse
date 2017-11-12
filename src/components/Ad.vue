@@ -94,7 +94,7 @@
       alert("1200");
       getOpenId(appId,appSecret,code).then((res) => {
         alert("1201");
-        alert(res);
+
         this.openId = res.openid
 
         getJsapiTicket(res.access_token).then((res) => {
@@ -166,8 +166,6 @@
             console.log(err)
           })
         })
-
-
 
       }).catch((e) => {
         alert(e)
