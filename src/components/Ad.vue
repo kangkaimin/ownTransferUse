@@ -95,11 +95,11 @@
 
       getOpenId(appId, appSecret, code).then((res) => {
 
-        that.openId = res.openid
+        that.openId = res.openid;
         getJsapiTicket(appId, appSecret).then((res) => {
 
           var ret = {
-            jsapi_ticket: "jsapi_ticket",
+            jsapi_ticket: res.ticket,
             nonceStr: Math.random().toString(36).substr(2, 16),
             timestamp: parseInt(new Date().getTime() / 1000) + '',
             url: encodeURIComponent(location.href.split('#')[0]),
