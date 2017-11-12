@@ -105,6 +105,8 @@ router.get('/getJsapiTicket', function (req, res) {
 
   var dur = new Date().getTime() - startTime
 
+  console.log("new Date().getTime():"+new Date().getTime()+"   startTime:"+startTime+ "  ticketData:"+ticketData+"  dur / 1000 < 7000:"+dur / 1000 < 7000)
+
   if (ticketData != null && dur / 1000 < 7000) {
     res.send(ticketData)
     console.log("ticketData : "+ticketData)
