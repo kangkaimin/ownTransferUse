@@ -160,7 +160,7 @@
         })
 
       }).catch((e) => {
-        console.log("微信access_token请求失败:" + e)
+        alert(e)
       })
 
       wx.ready(function () {
