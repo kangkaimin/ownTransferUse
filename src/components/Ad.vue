@@ -106,7 +106,7 @@
           var ret = {
             jsapi_ticket: "jsapi_ticket",
             nonceStr: Math.random().toString(36).substr(2, 16),
-            timestamp: parseInt(new Date().getTime() / 1000) + '',
+            timestamp: parseInt(new Date().getTime() / 1000),
             url: encodeURIComponent(location.href.split('#')[0]),
             signature: ''
           };
