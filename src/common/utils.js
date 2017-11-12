@@ -60,12 +60,13 @@ export function getOpenId(appid,secret,code) {
 }
 
 export function hasUser(userId) {
+
   const url = '/h5shareapi/hasUser'
   const data = Object.assign({}, {
     userId:userId,
   })
 
-  axios.get(url, {
+  return axios.get(url, {
     params: data
   }).then((res) => {
     return Promise.resolve(res)

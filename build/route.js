@@ -131,14 +131,14 @@ router.get('/getJsapiTicket', function (req, res) {
     })
   }
 
-
 })
 
 //用户是否存在
 router.get('/hasUser', function (req, res) {
-  var url = 'https://api.bmob.cn/1/classes/H5User' + '?where={"userId":' + req.userId + '}';
+  console.log("router:"+req.query.userId)
+  var url = 'https://api.bmob.cn/1/classes/H5User' + '?where={"userId":' + req.query.userId + '}';
 
-  axios.get(url1, {
+  axios.get(url, {
     headers: theHeaders,
   }).then((response) => {
     if (response.data.results.length > 0){
