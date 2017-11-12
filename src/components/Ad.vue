@@ -69,7 +69,7 @@
         noCourseContent: "",
         receivePeople: 0,
         receiveCourse: 0,
-        openId:''
+        openId: ''
       }
     },
     name: 'app',
@@ -175,7 +175,7 @@
         wx.onMenuShareTimeline({
           title: title, // 分享标题
           link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl:imgUrl, // 分享图标
+          imgUrl: imgUrl, // 分享图标
           success: function () {
             // 用户确认分享后执行的回调函数
           },
@@ -254,6 +254,9 @@
       courseitem
     },
     methods: {
+      getUrlKey(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+      },
       sortMethod(a, b) {
         return a.index - b.index
       },
