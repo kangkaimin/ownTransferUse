@@ -53,7 +53,6 @@ export function getOpenId(appid,secret,code) {
   return axios.get(url, {
     params: data
   }).then((res) => {
-
     return Promise.resolve(res.data)
   }).catch((e) => {
     console.log("getUserInfo : " + e)

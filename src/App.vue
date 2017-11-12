@@ -6,12 +6,14 @@
 
 <script>
   import {shareScuuess} from "./common/utils"
-  import jsSHA from "jssha"
   import axios from "axios"
 
   export default {
     name: 'app',
     created() {
+
+//      this.$router.push('/ad?id=123123')
+//      return
 
       var access_code = this.getUrlKey('code');
 

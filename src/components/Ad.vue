@@ -46,6 +46,7 @@
 <script>
   import courseitem from "./CourseItem"
   import axios from "axios"
+  import crypto from "crypto"
 
   import {
     notifyCourse,
@@ -81,17 +82,19 @@
 //      this.screenHeight = window.innerHeight;
     },
     created() {
+
+      let that = this
+
       //获取openID
       var appId = 'wxb4d337ae696167c6';
       var appSecret = '4ecd990e4a9373110d2ea8bd2f85f7ea';
       var code = this.getUrlKey("code");
-//      https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
 
       alert(this.getUrlKey("code") + "   000")
 
       var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + code + '&grant_type=authorization_code';
 
-      getOpenId(appId,appSecret,code).then((res) => {
+      getOpenId(appId, appSecret, code).then((res) => {
         alert("1201");
 
         this.openId = res.openid
@@ -100,7 +103,7 @@
           alert(res);
 
           var ret = {
-            jsapi_ticket: res.ticket,
+            jsapi_ticket: "jsapi_ticket",
             nonceStr: Math.random().toString(36).substr(2, 16),
             timestamp: parseInt(new Date().getTime() / 1000) + '',
             url: location.href,
@@ -112,8 +115,9 @@
             "&timestamp=" + ret.timestamp +
             "&url=" + ret.url;
 
-          var shaObj = new jsSHA(string1, 'TEXT');
-          ret.signature = shaObj.getHash('SHA-1', 'HEX');
+          var sha1 = crypto.createHash('sha1');
+          sha1.update(string1);
+          ret.nonceStr = sha1.digest('hex');
 
           alert(string1);
 
@@ -127,18 +131,17 @@
           });
 
           //根据 openid 获取信息
-          let that = this
 
           alert("-0-0-0-0-0-0")
 
           //获取个人信息asd
-          getUserInfo(this.openId).then((response) => {
+          getUserInfo(that.openId).then((response) => {
             if (response.results.length > 0) {
               that.course = response.results[0].course
               that.shareCount = response.results[0].shareCount
               that.objectId = response.results[0].objectId
             } else {
-              createUserInfo(this.openId)
+              createUserInfo(that.openId)
             }
           }).catch((err) => {
             console.log(err)
@@ -178,7 +181,7 @@
         alert("微信设置成功")
 
         var title = '俄语练习';
-        var link = 'http://m.enaotu.com/ad?id=' + this.openId;
+        var link = 'http://m.enaotu.com/ad?id=' + that.openId;
         var imgUrl = 'http://m.enaotu.com/test.jpg';
         var desc = "一起学习俄语"
 
