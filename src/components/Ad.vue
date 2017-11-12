@@ -97,7 +97,7 @@
       getOpenId(appId, appSecret, code).then((res) => {
         alert("1201");
 
-        this.openId = res.openid
+        that.openId = res.openid
         getJsapiTicket(res.access_token).then((res) => {
 
           alert(res);
@@ -136,6 +136,8 @@
 
           //获取个人信息asd
           getUserInfo(that.openId).then((response) => {
+
+            alert("-0-0-0-0-0-0    2")
             if (response.results.length > 0) {
               that.course = response.results[0].course
               that.shareCount = response.results[0].shareCount
@@ -148,6 +150,9 @@
           }).finally(function () {
             //获取课程信息
             getCourse().then((response) => {
+
+              alert("-0-0-0-0-0-0    3")
+
               that.tranArr = response.results.sort(that.sortMethod)
               that.notifyItems();
             }).catch((err) => {
@@ -166,8 +171,10 @@
               }
             })
 
-            this.receivePeople = peopleNum
-            this.receiveCourse = courseNum
+            alert("-0-0-0-0-0-0    4")
+
+            that.receivePeople = peopleNum
+            that.receiveCourse = courseNum
           }).catch((err) => {
             console.log(err)
           })
