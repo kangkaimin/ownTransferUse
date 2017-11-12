@@ -109,7 +109,7 @@
               alert("step 2 " + sharerId)
               shareScuuess(sharerId);
             }
-          })
+          }).catch()
         }
 
         that.openId = res.openid;
