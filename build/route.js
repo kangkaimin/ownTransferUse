@@ -99,13 +99,15 @@ var accessTokenData;
 var startTime;
 
 router.get('/getJsapiTicket', function (req, res) {
-  if (!ticketData) {
+  if (ticketData == null ) {
     startTime = new Date().getTime();
   }
 
   var dur = new Date().getTime() - startTime
 
+  console.log("------------------------------------------------------------------------------------")
   console.log("new Date().getTime():"+new Date().getTime()+"   startTime:"+startTime+ "  ticketData:"+ticketData+"  dur / 1000 < 7000:"+dur / 1000 < 7000)
+  console.log("------------------------------------------------------------------------------------")
 
   if (ticketData != null && dur / 1000 < 7000) {
     res.send(ticketData)
