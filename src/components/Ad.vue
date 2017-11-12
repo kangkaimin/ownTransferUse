@@ -91,13 +91,14 @@
 
       var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + code + '&grant_type=authorization_code';
 
-      alert("1200");
       getOpenId(appId,appSecret,code).then((res) => {
         alert("1201");
 
         this.openId = res.openid
-
         getJsapiTicket(res.access_token).then((res) => {
+
+          alert(res);
+
           var ret = {
             jsapi_ticket: res.ticket,
             nonceStr: Math.random().toString(36).substr(2, 16),
@@ -113,6 +114,8 @@
 
           var shaObj = new jsSHA(string1, 'TEXT');
           ret.signature = shaObj.getHash('SHA-1', 'HEX');
+
+          alert(string1);
 
           wx.config({
             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -170,8 +173,6 @@
       }).catch((e) => {
         alert(e)
       })
-
-      alert("1203");
 
       wx.ready(function () {
         alert("微信设置成功")
@@ -240,12 +241,9 @@
 
       });
 
-      alert("1204");
       wx.error(function (res) {
         alert("微信设置shibai")
       });
-
-      alert("1205");
 
     },
     mounted() {

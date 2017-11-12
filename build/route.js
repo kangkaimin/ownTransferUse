@@ -84,17 +84,29 @@ router.get('/getOpenId', function (req, res) {
 
 })
 
-// getJsapiTicket
+var ticketData;
+var startTime;
+
 router.get('/getJsapiTicket', function (req, res) {
+  if (!ticketData) {
+    startTime = new Date().getTime();
+  }
 
-  var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='+req.query.appId+'&secret='+req.query.appSecret;
-  axios.get(url).then((response) => {
-    var url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=' + response.data.access_token + '&type=jsapi';
+  var dur = new Date().getTime() - startTime
+
+  if (ticketData != null && dur / 1000 < 7000) {
+    res.send(ticketData)
+  } else {
+    var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + req.query.appId + '&secret=' + req.query.appSecret;
     axios.get(url).then((response) => {
-      res.send(response.data)
+      var url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=' + response.data.access_token + '&type=jsapi';
+      axios.get(url).then((response) => {
+        res.send(response.data)
+        startTime = new Date().getTime();
+        ticketData = response.data
+      })
     })
-  })
-
+  }
 
 
 })
