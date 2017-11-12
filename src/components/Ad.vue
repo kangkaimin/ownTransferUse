@@ -98,7 +98,7 @@
         alert("1201");
 
         that.openId = res.openid
-        getJsapiTicket(res.access_token).then((res) => {
+        getJsapiTicket(appId,appSecret).then((res) => {
 
           alert(res);
           alert(location.href);

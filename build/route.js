@@ -99,6 +99,8 @@ router.get('/getJsapiTicket', function (req, res) {
     console.log("ticketData : "+ticketData)
     console.log(ticketData)
   } else {
+
+
     var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + req.query.appId + '&secret=' + req.query.appSecret;
     axios.get(url).then((response) => {
       console.log("access_token : ")
