@@ -64,7 +64,6 @@ router.get('/shareScuuess', function (req, res) {
     }, {
       headers: theHeaders,
     }).then((response) => {
-
       res.send("success")
     })
   })

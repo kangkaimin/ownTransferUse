@@ -112,6 +112,7 @@
             "&url=" + ret.url;
 
           alert('string1:' + string1);
+          alert('location.href:' + location.href.split('#')[0]);
 
           var sha1 = crypto.createHash('sha1');
           sha1.update(string1);
@@ -121,14 +122,12 @@
 
           wx.config({
             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: appId, // 必填，公众号的唯一标识
+            appId:  'wxb4d337ae696167c6', // 必填，公众号的唯一标识
             timestamp: ret.timestamp,// 必填，生成签名的时间戳
             nonceStr: ret.nonceStr, // 必填，生成签名的随机串
             signature: ret.signature,// 必填，签名，见附录1
-            jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
           });
-
-          //根据 openid 获取信息
 
           //获取个人信息asd
           getUserInfo(that.openId).then((response) => {
