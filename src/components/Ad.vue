@@ -188,7 +188,7 @@
       wx.ready(function () {
 
         var title = '如何用俄语赚到钱？';
-        var link = 'http://m.enaotu.com/ad?id=' + that.openId;
+        var link = 'http://m.enaotu.com?id=' + that.openId;
         var imgUrl = 'http://bmob-cdn-15054.b0.upaiyun.com/2017/11/12/3dcaec4040a4db2c80a7f8669b702bfb.png';
         var desc = "实用俄语纯干货句子合集。"
 
