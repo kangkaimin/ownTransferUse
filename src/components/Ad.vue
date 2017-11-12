@@ -116,7 +116,10 @@
             "&timestamp=" + ret.timestamp +
             "&url=" + ret.url;
 
-          alert(string1);
+          alert(ret.jsapi_ticket);
+          alert(ret.nonceStr);
+          alert(ret.timestamp);
+          alert(location.href);
 
           var sha1 = crypto.createHash('sha1');
           sha1.update(string1);
