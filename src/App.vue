@@ -53,26 +53,8 @@
 
       alert(fromurl)
       alert(location.href)
-      var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4d337ae696167c6&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=' + state + '#wechat_redirect';
+      var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4d337ae696167c6&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=' + id + '#wechat_redirect';
       location.href = url;
-
-//      if (this.getUrlKey("state") != null) {
-//
-//        var secret = 's';
-//        var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + wxb4d337ae696167c6 + '&secret=' + secret + '&code=' + this.getUrlKey("code") + '&grant_type=authorization_code';
-//
-//
-//        var openId = ''
-//        axios.get(urlTran).then((res) => {
-//          alert(res);
-//        }).catch((e) => {
-//          console.log("微信access_token请求失败:" + e)
-//        })
-//      }
-
-
-//      this.$router.push('/ad?id=123123')
-
 
     },
     methods: {
