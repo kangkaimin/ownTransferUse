@@ -86,7 +86,6 @@
     },
     created() {
       var sharerId = this.getUrlKey("state");
-      alert("sharerId:" + sharerId)
 
       let that = this
 
@@ -99,14 +98,11 @@
 
       getOpenId(appId, appSecret, code).then((res) => {
 
-        alert("step 1" + sharerId)
         if (sharerId != null) {
           hasUser(res.openid).then((res) => {
-            alert("step 2 " + (res == "true"))
             if (res == "true") {
               //用户已经接受邀请
             } else {
-              alert("step 2 " + sharerId)
               shareScuuess(sharerId);
             }
           }).catch()
