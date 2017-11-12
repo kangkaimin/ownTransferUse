@@ -61,11 +61,12 @@ export function getOpenId(appid,secret,code) {
 }
 
 // 获取 JsapiTicket,因为跨域问题
-export function getJsapiTicket(access_token) {
+export function getJsapiTicket(appId,appSecret) {
   const url = '/h5shareapi/getJsapiTicket'
 
   const data = Object.assign({}, {
-    access_token:access_token
+    appId:appId,
+    appSecret:appSecret
   })
 
   return axios.get(url, {
