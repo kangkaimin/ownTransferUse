@@ -116,6 +116,7 @@
             "&timestamp=" + ret.timestamp +
             "&url=" + ret.url;
 
+          alert("===================================================");
           alert(ret.jsapi_ticket);
           alert(ret.nonceStr);
           alert(ret.timestamp);

@@ -107,6 +107,7 @@ router.get('/getJsapiTicket', function (req, res) {
         startTime = new Date().getTime();
         ticketData = response.data
         console.log("ticketData : "+ticketData)
+        console.log(ticketData)
       })
     })
   }
