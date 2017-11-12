@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    实打实大苏打我
     <router-view/>
   </div>
 </template>
@@ -44,60 +43,35 @@
 //        });
 //      }
 
-      var access_code = this.getUrlKey('code');
+      var id = this.getUrlKey("id");
 
-      if (access_code == null) {
-        var state = this.getUrlKey("id");
-        var fromurl = "http://m.enaotu.com/ad";
-
-        alert(fromurl)
-        alert(location.href)
-        var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4d337ae696167c6&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=' + state + '#wechat_redirect';
-        location.href = url;
-      } else {
-        if (this.getUrlKey("state") != null){
-          shareScuuess(this.getUrlKey("id"));
-        }
-
-        var secret = 's';
-        var url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + wxb4d337ae696167c6 + '&secret=' + secret + '&code=' + this.getUrlKey("code") + '&grant_type=authorization_code';
-
-
-        var openId = ''
-        axios.get(url).then((res) => {
-          alert(res);
-        }).catch((e) => {
-          console.log("微信access_token请求失败:" + e)
-        })
+      if (id != null){
+        shareScuuess(this.getUrlKey("id"));
       }
 
-      return
+      var fromurl = "http://m.enaotu.com/ad";
+
+      alert(fromurl)
+      alert(location.href)
+      var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4d337ae696167c6&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=' + state + '#wechat_redirect';
+      location.href = url;
+
+//      if (this.getUrlKey("state") != null) {
+//
+//        var secret = 's';
+//        var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + wxb4d337ae696167c6 + '&secret=' + secret + '&code=' + this.getUrlKey("code") + '&grant_type=authorization_code';
+//
+//
+//        var openId = ''
+//        axios.get(urlTran).then((res) => {
+//          alert(res);
+//        }).catch((e) => {
+//          console.log("微信access_token请求失败:" + e)
+//        })
+//      }
 
 
-      var ret = {
-        jsapi_ticket: jsapi_ticket,
-        nonceStr: Math.random().toString(36).substr(2, 16),
-        timestamp: parseInt(new Date().getTime() / 1000) + '',
-        url: url
-      };
-
-//      var string = raw(ret);
-//      jsSHA = require('jssha');
-//      shaObj = new jsSHA(string, 'TEXT');
-//      ret.signature = shaObj.getHash('SHA-1', 'HEX');
-
-//      wx.config({
-//        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-//        appId: 'wxb4d337ae696167c6', // 必填，公众号的唯一标识
-//        timestamp:,// 必填，生成签名的时间戳
-//        nonceStr:, // 必填，生成签名的随机串
-//        signature: '',// 必填，签名，见附录1
-//        jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-//      });
-
-
-      this.$router.push('/ad?id=123123')
-
+//      this.$router.push('/ad?id=123123')
 
 
     },

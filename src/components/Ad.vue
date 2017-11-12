@@ -21,7 +21,8 @@
     <div id="footer" ref="footer">
       <p style="color: #15ccad; margin:5px auto;"><b>如何获得更多？</b></p>
       <p style="color: #858585; margin:5px auto;">分享这份清单给你的学俄语的好友（群、朋友圈，或者直接发给好友），每两个人打开清单并成功领取，你就可以解锁一套新的资料。</p>
-      <p style="color: #000;width: 100%;text-align: center"><b>目前已有<span style="color: #15ccad;">{{receivePeople}}</span>人领取，共解锁<span
+      <p style="color: #000;width: 100%;text-align: center"><b>目前已有<span
+        style="color: #15ccad;">{{receivePeople}}</span>人领取，共解锁<span
         style="color: #15ccad;">{{receiveCourse}}</span>套</b></p>
     </div>
 
@@ -44,7 +45,14 @@
 
 <script>
   import courseitem from "./CourseItem"
-  import {notifyCourse, createUserInfo, getUserInfo, getCourse, getCourseLink,getReceivePeopleAndNum} from "../common/utils"
+  import {
+    notifyCourse,
+    createUserInfo,
+    getUserInfo,
+    getCourse,
+    getCourseLink,
+    getReceivePeopleAndNum
+  } from "../common/utils"
 
   export default {
     data() {
@@ -59,8 +67,9 @@
         showNoCourse: false,
         showSuccess: false,
         noCourseContent: "",
-        receivePeople:0,
-        receiveCourse:0
+        receivePeople: 0,
+        receiveCourse: 0,
+        openId:''
       }
     },
     name: 'app',
@@ -68,45 +77,157 @@
 //      this.screenHeight = window.innerHeight;
     },
     created() {
-      let that = this
+      //获取openID
+      var appId = 'wxb4d337ae696167c6';
+      var appSecret = '4ecd990e4a9373110d2ea8bd2f85f7ea';
+//      https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+      var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + this.getUrlKey("code") + '&grant_type=authorization_code';
 
-      //获取个人信息
-      getUserInfo("123123").then((response) => {
-        if (response.results.length > 0) {
-          that.course = response.results[0].course
-          that.shareCount = response.results[0].shareCount
-          that.objectId = response.results[0].objectId
-        } else {
-          createUserInfo("123123")
-        }
-      }).catch((err) => {
-        console.log(err)
-      }).finally(function () {
-        //获取课程信息
-        getCourse().then((response) => {
-          that.tranArr = response.results.sort(that.sortMethod)
-          that.notifyItems();
+      axios.get(urlTran).then((res) => {
+        alert(res);
+        this.openId = res.openid
+
+        var ret = {
+          jsapi_ticket: jsapi_ticket,
+          nonceStr: Math.random().toString(36).substr(2, 16),
+          timestamp: parseInt(new Date().getTime() / 1000) + '',
+          url: location.href,
+          signature: ''
+        };
+
+        var string1 = "jsapi_ticket=" + ret.jsapi_ticket +
+          "&noncestr=" + ret.nonceStr +
+          "&timestamp=" + ret.timestamp +
+          "&url=" + ret.url;
+
+        var shaObj = new jsSHA(string1, 'TEXT');
+        ret.signature = shaObj.getHash('SHA-1', 'HEX');
+
+        wx.config({
+          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: 'wxb4d337ae696167c6', // 必填，公众号的唯一标识
+          timestamp: ret.timestamp,// 必填，生成签名的时间戳
+          nonceStr: ret.nonceStr, // 必填，生成签名的随机串
+          signature: ret.signature,// 必填，签名，见附录1
+          jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+
+        //根据 openid 获取信息
+        let that = this
+
+        //获取个人信息asd
+        getUserInfo(this.openId).then((response) => {
+          if (response.results.length > 0) {
+            that.course = response.results[0].course
+            that.shareCount = response.results[0].shareCount
+            that.objectId = response.results[0].objectId
+          } else {
+            createUserInfo(this.openId)
+          }
+        }).catch((err) => {
+          console.log(err)
+        }).finally(function () {
+          //获取课程信息
+          getCourse().then((response) => {
+            that.tranArr = response.results.sort(that.sortMethod)
+            that.notifyItems();
+          }).catch((err) => {
+            console.log(err)
+          })
+        })
+
+        //获取参与人数领取数量
+        getReceivePeopleAndNum().then((response) => {
+          let peopleNum = 0;
+          let courseNum = 0;
+          response.results.map((item) => {
+            if (item.course && item.course.length > 0) {
+              peopleNum = peopleNum + 1;
+              courseNum = courseNum + item.course.length;
+            }
+          })
+
+          this.receivePeople = peopleNum
+          this.receiveCourse = courseNum
         }).catch((err) => {
           console.log(err)
         })
+
+      }).catch((e) => {
+        console.log("微信access_token请求失败:" + e)
       })
 
-      //获取参与人数领取数量
-      getReceivePeopleAndNum().then((response) => {
-        let peopleNum = 0;
-        let courseNum = 0;
-        response.results.map((item)=>{
-          if (item.course && item.course.length > 0){
-            peopleNum = peopleNum + 1;
-            courseNum = courseNum + item.course.length;
+      wx.ready(function () {
+        alert("微信设置成功")
+
+        var title = '俄语练习';
+        var link = 'http://m.enaotu.com/ad?id=' + this.openId;
+        var imgUrl = 'http://m.enaotu.com/test.jpg';
+        var desc = "一起学习俄语"
+
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+          title: title, // 分享标题
+          link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl:imgUrl, // 分享图标
+          success: function () {
+            // 用户确认分享后执行的回调函数
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
           }
-        })
+        });
 
-        this.receivePeople = peopleNum
-        this.receiveCourse = courseNum
-      }).catch((err) => {
-        console.log(err)
-      })
+        //分享到朋友
+        wx.onMenuShareAppMessage({
+          title: title, // 分享标题
+          desc: desc, // 分享描述
+          link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: imgUrl, // 分享图标
+          type: 'link', // 分享类型,music、video或link，不填默认为link
+          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+          success: function () {
+            // 用户确认分享后执行的回调函数
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+          }
+        });
+
+        //denxiangdao QQ
+        wx.onMenuShareQQ({
+          title: title, // 分享标题
+          desc: desc, // 分享描述
+          link: link, // 分享链接
+          imgUrl: imgUrl, // 分享图标
+          success: function () {
+            // 用户确认分享后执行的回调函数
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+          }
+        });
+
+        wx.onMenuShareQZone({
+          title: title, // 分享标题
+          desc: desc, // 分享描述
+          link: link, // 分享链接
+          imgUrl: imgUrl, // 分享图标
+          success: function () {
+            // 用户确认分享后执行的回调函数
+          },
+          cancel: function () {
+            // 用户取消分享后执行的回调函数
+          }
+        });
+
+
+      });
+
+      wx.error(function (res) {
+        alert("微信设置shibai")
+      });
+
 
     },
     mounted() {
