@@ -96,6 +96,7 @@ router.get('/getJsapiTicket', function (req, res) {
 
   if (ticketData != null && dur / 1000 < 7000) {
     res.send(ticketData)
+    console.log("ticketData : "+ticketData)
   } else {
     var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + req.query.appId + '&secret=' + req.query.appSecret;
     axios.get(url).then((response) => {
@@ -104,6 +105,7 @@ router.get('/getJsapiTicket', function (req, res) {
         res.send(response.data)
         startTime = new Date().getTime();
         ticketData = response.data
+        console.log("ticketData : "+ticketData)
       })
     })
   }
