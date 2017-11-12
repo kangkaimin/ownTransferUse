@@ -81,11 +81,15 @@
       var appId = 'wxb4d337ae696167c6';
       var appSecret = '4ecd990e4a9373110d2ea8bd2f85f7ea';
 //      https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+
+      alert(this.getUrlKey("code") + "   000")
+
       var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + this.getUrlKey("code") + '&grant_type=authorization_code';
 
       axios.get(urlTran).then((res) => {
         alert(res);
         this.openId = res.openid
+
 
         var ret = {
           jsapi_ticket: jsapi_ticket,
@@ -114,6 +118,8 @@
 
         //根据 openid 获取信息
         let that = this
+
+        alert("-0-0-0-0-0-0")
 
         //获取个人信息asd
         getUserInfo(this.openId).then((response) => {
