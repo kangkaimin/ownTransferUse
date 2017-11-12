@@ -58,7 +58,8 @@
     getOpenId,
     getJsapiTicket,
     showOnNode,
-    hasUser
+    hasUser,
+    shareScuuess
   } from "../common/utils"
 
   export default {
