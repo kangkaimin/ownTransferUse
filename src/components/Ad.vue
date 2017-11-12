@@ -124,7 +124,7 @@
 
           var sha1 = crypto.createHash('sha1');
           sha1.update(string1);
-          ret.nonceStr = sha1.digest('hex');
+          ret.signature = sha1.digest('hex');
 
           wx.config({
             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -142,7 +142,6 @@
           //获取个人信息asd
           getUserInfo(that.openId).then((response) => {
 
-            alert("-0-0-0-0-0-0    2")
             if (response.results.length > 0) {
               that.course = response.results[0].course
               that.shareCount = response.results[0].shareCount
@@ -155,8 +154,6 @@
           }).finally(function () {
             //获取课程信息
             getCourse().then((response) => {
-
-              alert("-0-0-0-0-0-0    3")
 
               that.tranArr = response.results.sort(that.sortMethod)
               that.notifyItems();
@@ -176,8 +173,6 @@
               }
             })
 
-            alert("-0-0-0-0-0-0    4")
-
             that.receivePeople = peopleNum
             that.receiveCourse = courseNum
           }).catch((err) => {
@@ -186,9 +181,7 @@
         })
 
       }).catch((e) => {
-        alert("-------- 1")
         alert(e)
-        alert("-------- 2")
       })
 
       wx.ready(function () {
