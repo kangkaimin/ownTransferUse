@@ -87,14 +87,18 @@
     created() {
       var id = this.getUrlKey("id");
       if (id != null) {
+        alert("step 1")
         hasUser(id).then((res)=>{
+          alert("step 2 " + res)
           if (res == "true"){
             //用户已经接受邀请
           }else{
+            alert("step 2 " + res)
             shareScuuess(this.getUrlKey("id"));
           }
         })
       }
+      alert("step 4 ")
 
       let that = this
 
