@@ -84,6 +84,19 @@ router.get('/getOpenId', function (req, res) {
 
 })
 
+// 获取openid
+router.get('/getJsapiTicket', function (req, res) {
+
+  console.log("getJsapiTicket 0000000000000000 " + req.query.access_token)
+
+  var url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=' + req.query.access_token + '&type=jsapi';
+  axios.get(url).then((response) => {
+    console.log(response.data)
+    res.send(response.data)
+  })
+
+})
+
 var courseCanUsedMap = new Map();
 // var courseCanUsed = new Array();
 // var courseCanUsedIndex = 0;

@@ -60,6 +60,24 @@ export function getOpenId(appid,secret,code) {
   })
 }
 
+// 获取 JsapiTicket,因为跨域问题
+export function getJsapiTicket(access_token) {
+  const url = '/h5shareapi/getJsapiTicket'
+
+  const data = Object.assign({}, {
+    access_token:access_token
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+
+    return Promise.resolve(res.data)
+  }).catch((e) => {
+    console.log("getUserInfo : " + e)
+  })
+}
+
 //
 
 //获取课程链接

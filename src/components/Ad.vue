@@ -54,7 +54,8 @@
     getCourse,
     getCourseLink,
     getReceivePeopleAndNum,
-    getOpenId
+    getOpenId,
+    getJsapiTicket
   } from "../common/utils"
 
   export default {
@@ -96,73 +97,77 @@
         alert(res);
         this.openId = res.openid
 
-        var ret = {
-          jsapi_ticket: jsapi_ticket,
-          nonceStr: Math.random().toString(36).substr(2, 16),
-          timestamp: parseInt(new Date().getTime() / 1000) + '',
-          url: location.href,
-          signature: ''
-        };
+        getJsapiTicket(res.access_token).then((res) => {
+          var ret = {
+            jsapi_ticket: res.ticket,
+            nonceStr: Math.random().toString(36).substr(2, 16),
+            timestamp: parseInt(new Date().getTime() / 1000) + '',
+            url: location.href,
+            signature: ''
+          };
 
-        var string1 = "jsapi_ticket=" + ret.jsapi_ticket +
-          "&noncestr=" + ret.nonceStr +
-          "&timestamp=" + ret.timestamp +
-          "&url=" + ret.url;
+          var string1 = "jsapi_ticket=" + ret.jsapi_ticket +
+            "&noncestr=" + ret.nonceStr +
+            "&timestamp=" + ret.timestamp +
+            "&url=" + ret.url;
 
-        var shaObj = new jsSHA(string1, 'TEXT');
-        ret.signature = shaObj.getHash('SHA-1', 'HEX');
+          var shaObj = new jsSHA(string1, 'TEXT');
+          ret.signature = shaObj.getHash('SHA-1', 'HEX');
 
-        wx.config({
-          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-          appId: 'wxb4d337ae696167c6', // 必填，公众号的唯一标识
-          timestamp: ret.timestamp,// 必填，生成签名的时间戳
-          nonceStr: ret.nonceStr, // 必填，生成签名的随机串
-          signature: ret.signature,// 必填，签名，见附录1
-          jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
+          wx.config({
+            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: 'wxb4d337ae696167c6', // 必填，公众号的唯一标识
+            timestamp: ret.timestamp,// 必填，生成签名的时间戳
+            nonceStr: ret.nonceStr, // 必填，生成签名的随机串
+            signature: ret.signature,// 必填，签名，见附录1
+            jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          });
 
-        //根据 openid 获取信息
-        let that = this
+          //根据 openid 获取信息
+          let that = this
 
-        alert("-0-0-0-0-0-0")
+          alert("-0-0-0-0-0-0")
 
-        //获取个人信息asd
-        getUserInfo(this.openId).then((response) => {
-          if (response.results.length > 0) {
-            that.course = response.results[0].course
-            that.shareCount = response.results[0].shareCount
-            that.objectId = response.results[0].objectId
-          } else {
-            createUserInfo(this.openId)
-          }
-        }).catch((err) => {
-          console.log(err)
-        }).finally(function () {
-          //获取课程信息
-          getCourse().then((response) => {
-            that.tranArr = response.results.sort(that.sortMethod)
-            that.notifyItems();
+          //获取个人信息asd
+          getUserInfo(this.openId).then((response) => {
+            if (response.results.length > 0) {
+              that.course = response.results[0].course
+              that.shareCount = response.results[0].shareCount
+              that.objectId = response.results[0].objectId
+            } else {
+              createUserInfo(this.openId)
+            }
+          }).catch((err) => {
+            console.log(err)
+          }).finally(function () {
+            //获取课程信息
+            getCourse().then((response) => {
+              that.tranArr = response.results.sort(that.sortMethod)
+              that.notifyItems();
+            }).catch((err) => {
+              console.log(err)
+            })
+          })
+
+          //获取参与人数领取数量
+          getReceivePeopleAndNum().then((response) => {
+            let peopleNum = 0;
+            let courseNum = 0;
+            response.results.map((item) => {
+              if (item.course && item.course.length > 0) {
+                peopleNum = peopleNum + 1;
+                courseNum = courseNum + item.course.length;
+              }
+            })
+
+            this.receivePeople = peopleNum
+            this.receiveCourse = courseNum
           }).catch((err) => {
             console.log(err)
           })
-        })
+        }
 
-        //获取参与人数领取数量
-        getReceivePeopleAndNum().then((response) => {
-          let peopleNum = 0;
-          let courseNum = 0;
-          response.results.map((item) => {
-            if (item.course && item.course.length > 0) {
-              peopleNum = peopleNum + 1;
-              courseNum = courseNum + item.course.length;
-            }
-          })
 
-          this.receivePeople = peopleNum
-          this.receiveCourse = courseNum
-        }).catch((err) => {
-          console.log(err)
-        })
 
       }).catch((e) => {
         alert(e)
