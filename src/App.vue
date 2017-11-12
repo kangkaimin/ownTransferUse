@@ -48,20 +48,22 @@
 
       if (access_code == null) {
         var state = this.getUrlKey("id");
-        var fromurl = "http://m.enaotu.com";
+        var fromurl = "http://m.enaotu.com/ad";
 
         alert(fromurl)
         alert(location.href)
         var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4d337ae696167c6&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=' + state + '#wechat_redirect';
         location.href = url;
-
       } else {
+        if (this.getUrlKey("state") != null){
+          shareScuuess(this.getUrlKey("id"));
+        }
 
-        alert(this.getUrlKey("code") + " " + this.getUrlKey("state"))
         var secret = 's';
-
         var url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + wxb4d337ae696167c6 + '&secret=' + secret + '&code=' + this.getUrlKey("code") + '&grant_type=authorization_code';
 
+
+        var openId = ''
         axios.get(url).then((res) => {
           alert(res);
         }).catch((e) => {
@@ -79,10 +81,10 @@
         url: url
       };
 
-//      var string = raw(ret);
-//      jsSHA = require('jssha');
-//      shaObj = new jsSHA(string, 'TEXT');
-//      ret.signature = shaObj.getHash('SHA-1', 'HEX');
+      var string = raw(ret);
+      jsSHA = require('jssha');
+      shaObj = new jsSHA(string, 'TEXT');
+      ret.signature = shaObj.getHash('SHA-1', 'HEX');
 
 //      wx.config({
 //        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -95,7 +97,7 @@
 
 
       this.$router.push('/ad?id=123123')
-      shareScuuess(this.getUrlKey("id"));
+
 
 
     },
