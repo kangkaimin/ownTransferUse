@@ -85,10 +85,10 @@
 //      this.screenHeight = window.innerHeight;
     },
     created() {
-      var id = this.getUrlKey("id");
-      if (id != null) {
+      var sharerId = this.getUrlKey("id");
+      if (sharerId != null) {
         alert("step 1")
-        hasUser(id).then((res)=>{
+        hasUser(sharerId).then((res)=>{
           alert("step 2 " + res)
           if (res == "true"){
             //用户已经接受邀请
