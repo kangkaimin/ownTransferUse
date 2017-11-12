@@ -91,23 +91,17 @@
       var appSecret = '4ecd990e4a9373110d2ea8bd2f85f7ea';
       var code = this.getUrlKey("code");
 
-      alert(this.getUrlKey("code") + "   000")
-
       var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + code + '&grant_type=authorization_code';
 
       getOpenId(appId, appSecret, code).then((res) => {
-        alert("1201");
 
         that.openId = res.openid
-        getJsapiTicket(appId,appSecret).then((res) => {
-
-          alert(res);
-          alert(location.href);
+        getJsapiTicket(appId, appSecret).then((res) => {
 
           var ret = {
             jsapi_ticket: "jsapi_ticket",
             nonceStr: Math.random().toString(36).substr(2, 16),
-            timestamp: parseInt(new Date().getTime() / 1000),
+            timestamp: parseInt(new Date().getTime() / 1000) + '',
             url: encodeURIComponent(location.href.split('#')[0]),
             signature: ''
           };
@@ -117,16 +111,13 @@
             "&timestamp=" + ret.timestamp +
             "&url=" + ret.url;
 
+          alert('string1:' + string1);
 
           var sha1 = crypto.createHash('sha1');
           sha1.update(string1);
           ret.signature = sha1.digest('hex');
 
-          alert("===================================================");
-          alert(ret.jsapi_ticket);
-          alert(ret.nonceStr);
-          alert(ret.timestamp);
-          alert(ret.signature);
+          alert('ret.signature:' + ret.signature);
 
           wx.config({
             debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -138,8 +129,6 @@
           });
 
           //根据 openid 获取信息
-
-          alert("-0-0-0-0-0-0")
 
           //获取个人信息asd
           getUserInfo(that.openId).then((response) => {
@@ -183,12 +172,11 @@
         })
 
       }).catch((e) => {
-        alert(e)
+
       })
 
       wx.ready(function () {
-
-        alert("微信设置成功")
+        alert("ready")
 
         var title = '俄语练习';
         var link = 'http://m.enaotu.com/ad?id=' + that.openId;
@@ -254,7 +242,7 @@
       });
 
       wx.error(function (res) {
-        alert('wx.error: '+JSON.stringify(res));
+        alert('wx.error: ' + JSON.stringify(res));
       });
 
     },

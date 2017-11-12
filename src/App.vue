@@ -17,8 +17,6 @@
 
       var access_code = this.getUrlKey('code');
 
-      alert(access_code)
-
       if (access_code != null) {
 //        location.href = 'http://m.enaotu.com/ad';
         return
@@ -32,8 +30,6 @@
 
       var fromurl = "http://m.enaotu.com/ad";
 
-      alert(fromurl)
-      alert(location.href)
       var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4d337ae696167c6&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=' + id + '#wechat_redirect';
       location.href = url;
 
