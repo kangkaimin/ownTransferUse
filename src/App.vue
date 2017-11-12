@@ -18,7 +18,6 @@
       var access_code = this.getUrlKey('code');
 
       if (access_code != null) {
-//        location.href = 'http://m.enaotu.com/ad';
         return
       }
 
