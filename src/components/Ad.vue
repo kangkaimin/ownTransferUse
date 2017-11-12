@@ -254,6 +254,7 @@
 
       wx.error(function (res) {
         alert("微信设置shibai")
+        alert(res)
       });
 
     },
