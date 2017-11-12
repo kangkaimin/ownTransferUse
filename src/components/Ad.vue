@@ -99,6 +99,7 @@
 
       getOpenId(appId, appSecret, code).then((res) => {
 
+        alert("step 1" + sharerId)
         if (sharerId != null) {
           hasUser(res.openid).then((res) => {
             alert("step 2 " + (res == "true"))
