@@ -100,7 +100,9 @@
         that.openId = res.openid
         getJsapiTicket(res.access_token).then((res) => {
 
+          alert("res ------------------- 1");
           alert(res);
+          alert("res ------------------- 2");
 
           var ret = {
             jsapi_ticket: "jsapi_ticket",
@@ -146,7 +148,6 @@
               createUserInfo(that.openId)
             }
           }).catch((err) => {
-            console.log("err ----- 3")
             console.log(err)
           }).finally(function () {
             //获取课程信息
@@ -157,7 +158,6 @@
               that.tranArr = response.results.sort(that.sortMethod)
               that.notifyItems();
             }).catch((err) => {
-              console.log("err ----- 2")
               console.log(err)
             })
           })
@@ -178,7 +178,6 @@
             that.receivePeople = peopleNum
             that.receiveCourse = courseNum
           }).catch((err) => {
-            console.log("err ----- 1")
             console.log(err)
           })
         })
@@ -251,7 +250,6 @@
             // 用户取消分享后执行的回调函数
           }
         });
-
 
       });
 
@@ -330,12 +328,10 @@
 
               this.showSuccess = true;
             }).catch((err) => {
-              console.log("err ----- 6")
               console.log(err)
             })
           }
         }).catch((err) => {
-          console.log("err ----- 5")
           console.log(err)
         })
       }
