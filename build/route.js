@@ -87,11 +87,10 @@ router.get('/getOpenId', function (req, res) {
 // show on node
 router.get('/showOnNode', function (req, res) {
 
-  console.log("getOpenId ------------------ " + req.query.conent )
+  console.log("getOpenId ------------------ " + req.query.conent)
 
 
 })
-
 
 
 var ticketData;
@@ -99,19 +98,22 @@ var accessTokenData;
 var startTime;
 
 router.get('/getJsapiTicket', function (req, res) {
-  if (ticketData == null ) {
+  if (ticketData == null) {
     startTime = new Date().getTime();
   }
 
   var dur = new Date().getTime() - startTime
 
   console.log("------------------------------------------------------------------------------------")
-  console.log("new Date().getTime():"+new Date().getTime()+"   startTime:"+startTime+ "  ticketData:"+ticketData+"  dur / 1000 < 7000:"+dur / 1000 < 7000)
+  console.log("new Date().getTime():" + new Date().getTime())
+  console.log("   startTime:" + startTime )
+  console.log("  ticketData:" + ticketData)
+  console.log("  dur / 1000 < 7000:" + (dur / 1000 < 7000))
   console.log("------------------------------------------------------------------------------------")
 
   if (ticketData != null && dur / 1000 < 7000) {
     res.send(ticketData)
-    console.log("ticketData : "+ticketData)
+    console.log("ticketData : " + ticketData)
     console.log(ticketData)
   } else {
 
