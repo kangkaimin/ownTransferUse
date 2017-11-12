@@ -80,16 +80,18 @@
       //获取openID
       var appId = 'wxb4d337ae696167c6';
       var appSecret = '4ecd990e4a9373110d2ea8bd2f85f7ea';
+      var code = this.getUrlKey("code");
 //      https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
 
       alert(this.getUrlKey("code") + "   000")
 
-      var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + this.getUrlKey("code") + '&grant_type=authorization_code';
+      var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + code + '&grant_type=authorization_code';
 
+      alert("1200");
       axios.get(urlTran).then((res) => {
+        alert("1201");
         alert(res);
         this.openId = res.openid
-
 
         var ret = {
           jsapi_ticket: jsapi_ticket,
@@ -163,6 +165,8 @@
         alert(e)
       })
 
+      alert("1203");
+
       wx.ready(function () {
         alert("微信设置成功")
 
@@ -230,10 +234,12 @@
 
       });
 
+      alert("1204");
       wx.error(function (res) {
         alert("微信设置shibai")
       });
 
+      alert("1205");
 
     },
     mounted() {
