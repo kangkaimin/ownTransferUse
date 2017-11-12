@@ -101,6 +101,7 @@
         getJsapiTicket(res.access_token).then((res) => {
 
           alert(res);
+          alert(location.href);
 
           var ret = {
             jsapi_ticket: "jsapi_ticket",
