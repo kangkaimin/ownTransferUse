@@ -12,7 +12,6 @@
   export default {
     name: 'app',
     created() {
-//      script('path/to/plugin.js')
 
 
       //这里需要注意账号权限的问题，看是否有网页授权，本例子的权限是：服务号
@@ -43,9 +42,16 @@
 //        });
 //      }
 
+      var access_code = getUrlKey('code');
+
+      if (access_code != null) {
+        location.href = 'http://m.enaotu.com/ad';
+        return
+      }
+
       var id = this.getUrlKey("id");
 
-      if (id != null){
+      if (id != null) {
         shareScuuess(this.getUrlKey("id"));
       }
 
