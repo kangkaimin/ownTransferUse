@@ -45,8 +45,8 @@ export function getOpenId(appid,secret,code) {
   const url = '/h5shareapi/getOpenId'
 
   const data = Object.assign({}, {
-    appid: appid,
-    secret: secret,
+    appId: appid,
+    appSecret: secret,
     code: code,
   })
 
