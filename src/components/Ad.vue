@@ -100,9 +100,7 @@
         that.openId = res.openid
         getJsapiTicket(res.access_token).then((res) => {
 
-          alert("res ------------------- 1");
           alert(res);
-          alert("res ------------------- 2");
 
           var ret = {
             jsapi_ticket: "jsapi_ticket",
@@ -183,7 +181,9 @@
         })
 
       }).catch((e) => {
+        alert("-------- 1")
         alert(e)
+        alert("-------- 2")
       })
 
       wx.ready(function () {
