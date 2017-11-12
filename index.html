@@ -22,3 +22,18 @@
   }
 
 </style>
+
+<script>
+
+  history.pushState(null, null, document.URL);
+  window.addEventListener('popstate', function() {
+    history.pushState(null, null, document.URL);
+  });
+
+  window.onpopstate = () => {
+    if (!this.allowBack) {    //    这个allowBack 是存在vuex里面的变量
+      history.go(1)
+    }
+  }
+
+</script>

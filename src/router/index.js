@@ -10,7 +10,8 @@ export default new Router({
     {
       path: '/ad',
       name: 'Ad',
-      component: Ad
+      component: Ad,
+      meta: {allowBack: false}
     }
   ]
 })
