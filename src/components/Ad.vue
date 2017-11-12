@@ -84,7 +84,6 @@
 //      this.screenHeight = window.innerHeight;
     },
     created() {
-
       var id = this.getUrlKey("id");
       if (id != null) {
         hasUser(id).then((res)=>{
@@ -109,7 +108,7 @@
 
         that.openId = res.openid;
         getJsapiTicket(appId, appSecret).then((res) => {
-          alert('res.ticket:' + res.ticket);
+
           var ret = {
             jsapi_ticket: res.ticket,
             nonceStr: Math.random().toString(36).substr(2, 16),
@@ -123,17 +122,12 @@
             "&timestamp=" + ret.timestamp +
             "&url=" + ret.url;
 
-          alert('string1:' + string1);
-          alert('location.href:' + location.href.split('#')[0]);
-
           var sha1 = crypto.createHash('sha1');
           sha1.update(string1);
           ret.signature = sha1.digest('hex');
 
-          alert('ret.signature:' + ret.signature);
-
           wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId:  'wxb4d337ae696167c6', // 必填，公众号的唯一标识
             timestamp: ret.timestamp,// 必填，生成签名的时间戳
             nonceStr: ret.nonceStr, // 必填，生成签名的随机串
@@ -187,12 +181,11 @@
       })
 
       wx.ready(function () {
-        alert("ready")
 
-        var title = '俄语练习';
+        var title = '如何用俄语赚到钱？';
         var link = 'http://m.enaotu.com/ad?id=' + that.openId;
-        var imgUrl = 'http://m.enaotu.com/test.jpg';
-        var desc = "一起学习俄语"
+        var imgUrl = 'http://bmob-cdn-15054.b0.upaiyun.com/2017/11/12/3dcaec4040a4db2c80a7f8669b702bfb.png';
+        var desc = "实用俄语纯干货句子合集。"
 
         //分享到朋友圈
         wx.onMenuShareTimeline({
@@ -253,7 +246,7 @@
       });
 
       wx.error(function (res) {
-        alert('wx.error: ' + JSON.stringify(res));
+
       });
 
     },
