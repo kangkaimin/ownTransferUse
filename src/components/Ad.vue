@@ -45,6 +45,8 @@
 
 <script>
   import courseitem from "./CourseItem"
+  import axios from "axios"
+  
   import {
     notifyCourse,
     createUserInfo,
