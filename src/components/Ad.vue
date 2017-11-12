@@ -46,14 +46,15 @@
 <script>
   import courseitem from "./CourseItem"
   import axios from "axios"
-  
+
   import {
     notifyCourse,
     createUserInfo,
     getUserInfo,
     getCourse,
     getCourseLink,
-    getReceivePeopleAndNum
+    getReceivePeopleAndNum,
+    getOpenId
   } from "../common/utils"
 
   export default {
@@ -90,7 +91,7 @@
       var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + code + '&grant_type=authorization_code';
 
       alert("1200");
-      axios.get(urlTran).then((res) => {
+      getOpenId(appId,appSecret,code).then((res) => {
         alert("1201");
         alert(res);
         this.openId = res.openid

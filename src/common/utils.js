@@ -40,6 +40,26 @@ export function getUserInfo(id) {
   })
 }
 
+// 获取openId,因为跨域问题
+export function getOpenId(appid,secret,code) {
+  const url = '/h5shareapi/getOpenId'
+
+  const data = Object.assign({}, {
+    appid: appid,
+    secret: secret,
+    code: code,
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+
+    return Promise.resolve(res.data)
+  }).catch((e) => {
+    console.log("getUserInfo : " + e)
+  })
+}
+
 //
 
 //获取课程链接

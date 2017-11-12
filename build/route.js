@@ -71,6 +71,18 @@ router.get('/shareScuuess', function (req, res) {
 
 })
 
+// 获取openid
+router.get('/getOpenId', function (req, res) {
+
+  console.log("getOpenId 0000000000000000 " +req.query.appId + "  "+req.query.appSecret+"  "+req.query.code)
+
+  var url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + req.query.appId + '&secret=' + req.query.appSecret + '&code=' + req.query.code + '&grant_type=authorization_code';
+  axios.get(url).then((response) => {
+    console.log(response)
+  })
+
+})
+
 var courseCanUsedMap = new Map();
 // var courseCanUsed = new Array();
 // var courseCanUsedIndex = 0;
