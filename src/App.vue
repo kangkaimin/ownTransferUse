@@ -48,7 +48,7 @@
 
       if (access_code == null) {
         var state = this.getUrlKey("id");
-        var fromurl = "m.enaotu.com";
+        var fromurl = "http://m.enaotu.com";
 
         alert(fromurl)
         alert(location.href)
