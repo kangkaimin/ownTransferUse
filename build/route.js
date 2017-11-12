@@ -84,6 +84,16 @@ router.get('/getOpenId', function (req, res) {
 
 })
 
+// show on node
+router.get('/showOnNode', function (req, res) {
+
+  console.log("getOpenId ------------------ " + req.query.conent )
+
+
+})
+
+
+
 var ticketData;
 var accessTokenData;
 var startTime;

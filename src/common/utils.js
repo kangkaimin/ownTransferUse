@@ -59,6 +59,21 @@ export function getOpenId(appid,secret,code) {
   })
 }
 
+export function showOnNode(content) {
+  const url = '/h5shareapi/showOnNode'
+  const data = Object.assign({}, {
+    content:content,
+  })
+
+  axios.get(url, {
+    params: data
+  }).then((res) => {
+
+  }).catch((e) => {
+
+  })
+}
+
 // 获取 JsapiTicket,因为跨域问题
 export function getJsapiTicket(appId,appSecret) {
   const url = '/h5shareapi/getJsapiTicket'

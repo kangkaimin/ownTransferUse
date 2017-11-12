@@ -56,7 +56,8 @@
     getCourseLink,
     getReceivePeopleAndNum,
     getOpenId,
-    getJsapiTicket
+    getJsapiTicket,
+    showOnNode
   } from "../common/utils"
 
   export default {
@@ -253,8 +254,7 @@
       });
 
       wx.error(function (res) {
-        alert("微信设置shibai")
-        alert(res)
+        alert('wx.error: '+JSON.stringify(res));
       });
 
     },
