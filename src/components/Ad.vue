@@ -97,7 +97,7 @@
 
         that.openId = res.openid;
         getJsapiTicket(appId, appSecret).then((res) => {
-
+          alert('res.ticket:' + res.ticket);
           var ret = {
             jsapi_ticket: res.ticket,
             nonceStr: Math.random().toString(36).substr(2, 16),
