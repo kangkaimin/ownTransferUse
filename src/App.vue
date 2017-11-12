@@ -22,12 +22,6 @@
         return
       }
 
-      var id = this.getUrlKey("id");
-
-      if (id != null) {
-        shareScuuess(this.getUrlKey("id"));
-      }
-
       var fromurl = "http://m.enaotu.com/ad";
 
       var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb4d337ae696167c6&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=' + id + '#wechat_redirect';

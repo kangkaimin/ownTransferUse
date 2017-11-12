@@ -59,20 +59,36 @@ export function getOpenId(appid,secret,code) {
   })
 }
 
-export function showOnNode(content) {
-  const url = '/h5shareapi/showOnNode'
+export function hasUser(userId) {
+  const url = '/h5shareapi/hasUser'
   const data = Object.assign({}, {
-    content:content,
+    userId:userId,
   })
 
   axios.get(url, {
     params: data
   }).then((res) => {
-
+    return Promise.resolve(res)
   }).catch((e) => {
 
   })
+
 }
+
+// export function showOnNode(content) {
+//   const url = '/h5shareapi/showOnNode'
+//   const data = Object.assign({}, {
+//     content:content,
+//   })
+//
+//   axios.get(url, {
+//     params: data
+//   }).then((res) => {
+//
+//   }).catch((e) => {
+//
+//   })
+// }
 
 // 获取 JsapiTicket,因为跨域问题
 export function getJsapiTicket(appId,appSecret) {

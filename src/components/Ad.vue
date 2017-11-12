@@ -57,7 +57,8 @@
     getReceivePeopleAndNum,
     getOpenId,
     getJsapiTicket,
-    showOnNode
+    showOnNode,
+    hasUser
   } from "../common/utils"
 
   export default {
@@ -83,6 +84,17 @@
 //      this.screenHeight = window.innerHeight;
     },
     created() {
+
+      var id = this.getUrlKey("id");
+      if (id != null) {
+        hasUser(id).then((res)=>{
+          if (res == "true"){
+            //用户已经接受邀请
+          }else{
+            shareScuuess(this.getUrlKey("id"));
+          }
+        })
+      }
 
       let that = this
 

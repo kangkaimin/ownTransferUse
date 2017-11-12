@@ -105,7 +105,7 @@ router.get('/getJsapiTicket', function (req, res) {
 
   console.log("------------------------------------------------------------------------------------")
   console.log("new Date().getTime():" + new Date().getTime())
-  console.log("   startTime:" + startTime )
+  console.log("   startTime:" + startTime)
   console.log("  ticketData:" + ticketData)
   console.log("  dur / 1000 < 7000:" + (dur / 1000 < 7000))
   console.log("------------------------------------------------------------------------------------")
@@ -134,6 +134,22 @@ router.get('/getJsapiTicket', function (req, res) {
 
 })
 
+//用户是否存在
+router.get('/hasUser', function (req, res) {
+  var url = 'https://api.bmob.cn/1/classes/H5User' + '?where={"userId":' + req.userId + '}';
+
+  axios.get(url1, {
+    headers: theHeaders,
+  }).then((response) => {
+    if (response.data.results.length > 0){
+      res.send("true")
+    }else{
+      res.send("false")
+    }
+  })
+})
+
+
 var courseCanUsedMap = new Map();
 // var courseCanUsed = new Array();
 // var courseCanUsedIndex = 0;
@@ -142,7 +158,6 @@ var courseCanUsedMap = new Map();
 router.get('/getCourseLink', function (req, res) {
 
   if (courseCanUsedMap && courseCanUsedMap.has(req.query.name)) {
-
 
     var courseCanUsedArr = courseCanUsedMap.get(req.query.name).arr;
     var courseCanUsedIndex = courseCanUsedMap.get(req.query.name).ind;
@@ -170,6 +185,7 @@ router.get('/getCourseLink', function (req, res) {
 
     }
   }
+
 
   {
 
