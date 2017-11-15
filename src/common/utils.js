@@ -167,11 +167,14 @@ export function notifyCourse(courseArr, userId) {
 }
 
 // 新建用户
-export function createUserInfo(userId) {
+export function createUserInfo(userId,fromId) {
   const url = '/h5shareapi/createUserInfo'
 
   return axios.get(url, {
-    params: {"userId": userId}
+    params: {
+      "userId": userId,
+      "fromId": fromId
+    }
   }).then((res) => {
     return Promise.resolve(res.data)
   }).catch((e) => {

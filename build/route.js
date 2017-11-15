@@ -32,6 +32,7 @@ router.get('/createUserInfo', function (req, res) {
 
   axios.post(url, {
     "userId": req.query.userId,
+    "fromWhere": req.query.fromId,
     "shareCount": 0,
     "course": {"__op": "Add", "objects": []},
   }, {
@@ -69,6 +70,20 @@ router.get('/shareScuuess', function (req, res) {
   })
 
 })
+
+// //设置推荐人
+// // 获取openid
+// router.get('/fromWhere', function (req, res) {
+//
+//   console.log("getOpenId ------------------ " + req.query.appId + "  " + req.query.appSecret + "  " + req.query.code)
+//
+//   var url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + req.query.appId + '&secret=' + req.query.appSecret + '&code=' + req.query.code + '&grant_type=authorization_code';
+//   axios.get(url).then((response) => {
+//     console.log(response.data)
+//     res.send(response.data)
+//   })
+//
+// })
 
 // 获取openid
 router.get('/getOpenId', function (req, res) {

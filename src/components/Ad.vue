@@ -22,8 +22,8 @@
       <p style="color: #15ccad; margin:5px auto;"><b>如何获得更多？</b></p>
       <p style="color: #858585; margin:5px auto;">分享这份清单给你的学俄语的好友（群、朋友圈，或者直接发给好友），每两个人打开清单并成功领取，你就可以解锁一套新的资料。</p>
       <p style="color: #000;width: 100%;text-align: center"><b>目前已有<span
-        style="color: #15ccad;">{{receivePeople}}</span>人领取，共解锁<span
-        style="color: #15ccad;">{{receiveCourse}}</span>套</b></p>
+        style="color: #15ccad;">{{shareCount}}</span>人领取，共解锁<span
+        style="color: #15ccad;">{{unlockCount}}</span>套</b></p>
     </div>
 
     <div id="mask" v-show="showNoCourse||showSuccess" @click="closeAllMask">
@@ -77,7 +77,8 @@
         noCourseContent: "",
         receivePeople: 0,
         receiveCourse: 0,
-        openId: ''
+        openId: '',
+        fromId: ''
       }
     },
     name: 'app',
@@ -85,7 +86,7 @@
 //      this.screenHeight = window.innerHeight;
     },
     created() {
-      var sharerId = this.getUrlKey("state");
+      fromId = this.getUrlKey("state");
 
       let that = this
 
@@ -98,15 +99,15 @@
 
       getOpenId(appId, appSecret, code).then((res) => {
 
-        if (sharerId != null) {
-          hasUser(res.openid).then((res) => {
-            if (res == "true") {
-              //用户已经接受邀请
-            } else {
-              shareScuuess(sharerId);
-            }
-          }).catch()
-        }
+//        if (sharerId != null) {
+//          hasUser(res.openid).then((res) => {
+//            if (res == "true") {
+//              //用户已经接受邀请
+//            } else {
+//             kkm-------------------------------!
+//            }
+//          }).catch()
+//        }
 
         that.openId = res.openid;
         getJsapiTicket(appId, appSecret).then((res) => {
@@ -144,8 +145,9 @@
               that.course = response.results[0].course
               that.shareCount = response.results[0].shareCount
               that.objectId = response.results[0].objectId
+              that.fromId = response.results[0].fromWhere
             } else {
-              createUserInfo(that.openId)
+              createUserInfo(that.openId, that.fromId)
             }
           }).catch((err) => {
             console.log(err)
@@ -160,22 +162,22 @@
             })
           })
 
-          //获取参与人数领取数量
-          getReceivePeopleAndNum().then((response) => {
-            let peopleNum = 0;
-            let courseNum = 0;
-            response.results.map((item) => {
-              if (item.course && item.course.length > 0) {
-                peopleNum = peopleNum + 1;
-                courseNum = courseNum + item.course.length;
-              }
-            })
-
-            that.receivePeople = peopleNum
-            that.receiveCourse = courseNum
-          }).catch((err) => {
-            console.log(err)
-          })
+//          //获取参与人数领取数量
+//          getReceivePeopleAndNum().then((response) => {
+//            let peopleNum = 0;
+//            let courseNum = 0;
+//            response.results.map((item) => {
+//              if (item.course && item.course.length > 0) {
+//                peopleNum = peopleNum + 1;
+//                courseNum = courseNum + item.course.length;
+//              }
+//            })
+//
+//            that.receivePeople = peopleNum
+//            that.receiveCourse = courseNum
+//          }).catch((err) => {
+//            console.log(err)
+//          })
         })
 
       }).catch((e) => {
@@ -263,7 +265,10 @@
     },
     computed: {
       freeCount() {
-        return parseInt((this.shareCount - this.course.length * 2 ) / 2)
+        return parseInt((this.shareCount - this.course.length * 2 ) / 2) + 1
+      },
+      unlockCount() {
+        return parseInt((this.shareCount ) / 2) + 1
       }
     },
     components: {
@@ -321,6 +326,9 @@
               this.notifyItems()
 
               this.showSuccess = true;
+
+              if (this.fromId)
+                shareScuuess(this.fromId);  // 请求后台设置领取成功
             }).catch((err) => {
               console.log(err)
             })
