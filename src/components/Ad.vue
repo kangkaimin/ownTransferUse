@@ -327,8 +327,10 @@
 
               this.showSuccess = true;
 
-              if (this.fromId)
-                shareScuuess(this.fromId);  // 请求后台设置领取成功
+              if (this.course.length < 1) {
+                if (this.fromId)
+                  shareScuuess(this.fromId);  // 请求后台设置领取成功
+              }
             }).catch((err) => {
               console.log(err)
             })
