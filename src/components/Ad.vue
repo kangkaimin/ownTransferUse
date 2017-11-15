@@ -282,7 +282,7 @@
         return a.index - b.index
       },
       goto() {
-        window.location.href = 'http://www.Baidu.com';
+//        window.location.href = 'http://www.Baidu.com';
       },
       closeAllMask() {
         this.showNoCourse = false;
