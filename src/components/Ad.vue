@@ -49,7 +49,8 @@
   import crypto from "crypto"
 
   import {
-    notifyCourse,
+    notifyCourseByOpenId,
+    notifyCourseByObjectId,
     createUserInfo,
     getUserInfo,
     getCourse,
@@ -306,11 +307,6 @@
 
         var that = this;
 
-        if(!that.objectId){
-          alert("无法获取您的ID，请重新打开网页");
-          return;
-        }
-
         if (that.course.includes(that.items[index].tableName)) {
           that.showSuccess = true;
           return
@@ -329,22 +325,39 @@
             that.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
           } else {
             that.course.push(that.items[index].tableName)
-            notifyCourse(that.course, that.objectId).then((response) => {
-              that.notifyItems()
 
-              that.showSuccess = true;
+            if (that.objectId) {
+              notifyCourseByObjectId(that.course, that.objectId).then((response) => {
+                that.notifyItems()
 
-              if (that.course.length < 1) {
-                if (that.fromId)
-                  shareScuuess(that.fromId);  // 请求后台设置领取成功
-              }
-            }).catch((err) => {
-              console.log(err)
-            })
+                that.showSuccess = true;
+
+                if (that.course.length == 1) {
+                  if (that.fromId)
+                    shareScuuess(that.fromId);  // 请求后台设置领取成功
+                }
+              }).catch((err) => {
+                console.log(err)
+              })
+            } else if (that.openId) {
+              notifyCourseByOpenId(that.course, that.openId).then((response) => {
+                that.notifyItems()
+
+                that.showSuccess = true;
+
+                if (that.course.length == 1) {
+                  if (that.fromId)
+                    shareScuuess(that.fromId);  // 请求后台设置领取成功
+                }
+              }).catch((err) => {
+                console.log(err)
+              })
+            }
           }
         }).catch((err) => {
           console.log(err)
         })
+
       }
     }
   }

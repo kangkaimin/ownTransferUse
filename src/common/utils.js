@@ -148,13 +148,31 @@ export function shareScuuess(userId) {
   })
 }
 
-// 添加课程到已领取
-export function notifyCourse(courseArr, userId) {
-  const url = '/h5shareapi/notifyCourse'
+// 添加课程到已领取  通过objectId
+export function notifyCourseByObjectId(courseArr, objectId) {
+  const url = '/h5shareapi/notifyCourseByObjectId'
 
   const data = Object.assign({}, {
     courseArr: courseArr,
-    userId: userId
+    objectId: objectId
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  }).catch((e) => {
+    console.log("notifyCourse : " + e)
+  })
+}
+
+// 添加课程到已领取  通过 openid
+export function notifyCourseByOpenId(courseArr, openId) {
+  const url = '/h5shareapi/notifyCourseByOpenId'
+
+  const data = Object.assign({}, {
+    courseArr: courseArr,
+    openId: openId
   })
 
   return axios.get(url, {

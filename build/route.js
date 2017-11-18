@@ -150,15 +150,15 @@ router.get('/getJsapiTicket', function (req, res) {
 
 //用户是否存在
 router.get('/hasUser', function (req, res) {
-  console.log("router:"+req.query.userId)
+  console.log("router:" + req.query.userId)
   var url = 'https://api.bmob.cn/1/classes/H5User' + '?where={"userId":' + req.query.userId + '}';
 
   axios.get(url, {
     headers: theHeaders,
   }).then((response) => {
-    if (response.data.results.length > 0){
+    if (response.data.results.length > 0) {
       res.send("true")
-    }else{
+    } else {
       res.send("false")
     }
   })
@@ -242,10 +242,10 @@ router.get('/getCourseLink', function (req, res) {
   }
 })
 
-//添加课程到已领取
-router.get('/notifyCourse', function (req, res) {
+//添加课程到已领取  通过ObjectId
+router.get('/notifyCourseByObjectId', function (req, res) {
 
-  axios.put('https://api.bmob.cn/1/classes/H5User/' + req.query.userId, {
+  axios.put('https://api.bmob.cn/1/classes/H5User/' + req.query.objectId, {
     course: {"__op": "AddUnique", "objects": req.query.courseArr},
   }, {
     headers: theHeaders,
@@ -254,6 +254,35 @@ router.get('/notifyCourse', function (req, res) {
   }).catch((err) => {
     console.log(err)
   })
+})
+
+//添加课程到已领取  通过 OpenId
+router.get('/notifyCourseByOpenId', function (req, res) {
+
+  var url = 'https://api.bmob.cn/1/classes/H5User?where={"userId":"' + req.query.openId + '"}';
+
+  axios.get(url, {
+    headers: theHeaders,
+  }).then((response) => {
+
+    if (response.data.results.length > 0) {
+      axios.put('https://api.bmob.cn/1/classes/H5User/' + response.data.results[0].objectId, {
+        course: {"__op": "AddUnique", "objects": req.query.courseArr},
+      }, {
+        headers: theHeaders,
+      }).then((response) => {
+        res.json(response.data)
+      }).catch((err) => {
+        console.log(err)
+      })
+
+    }
+
+    res.json(response.data)
+  }).catch((err) => {
+    console.log(err)
+  })
+
 })
 
 // 获取所有课程
