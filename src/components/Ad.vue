@@ -96,7 +96,7 @@
       var code = this.getUrlKey("code");
 
       var urlTran = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' + appId + '&secret=' + appSecret + '&code=' + code + '&grant_type=authorization_code';
-      alert("getOpenId");
+
       getOpenId(appId, appSecret, code).then((res) => {
 
 //        if (sharerId != null) {
@@ -108,7 +108,7 @@
 //            }
 //          }).catch()
 //        }
-        alert("getJsapiTicket");
+
         that.openId = res.openid;
         getJsapiTicket(appId, appSecret).then((res) => {
 
@@ -138,7 +138,6 @@
             jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
           });
 
-          alert("getUserInfo");
           //获取个人信息asd
           getUserInfo(that.openId).then((response) => {
 
@@ -154,14 +153,11 @@
             console.log(err)
           }).finally(function () {
 
-            alert("getCourse");
             //获取课程信息
             getCourse().then((response) => {
-              alert("tranArr:"+that.tranArr.length);
               that.tranArr = response.results.sort(that.sortMethod)
               that.notifyItems();
             }).catch((err) => {
-              alert("err:"+err.message);
               console.log(err)
             })
           })
