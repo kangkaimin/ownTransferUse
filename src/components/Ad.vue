@@ -307,37 +307,39 @@
       },
       itemClick(index) {
 
-        if(!this.objectId){
+        var that = this;
+
+        if(!that.objectId){
           alert("无法获取您的ID，请重新打开网页");
           return;
         }
 
-        if (this.course.includes(this.items[index].tableName)) {
-          this.showSuccess = true;
+        if (that.course.includes(that.items[index].tableName)) {
+          that.showSuccess = true;
           return
         }
 
-        if (this.freeCount < 1) {
-          this.showNoCourse = true;
-          this.noCourseContent = "没有更多领取机会了。您可以通过分享获得更多资格。";
+        if (that.freeCount < 1) {
+          that.showNoCourse = true;
+          that.noCourseContent = "没有更多领取机会了。您可以通过分享获得更多资格。";
           return
         }
 
-        getCourseLink(this.items[index].tableName).then((response) => {
+        getCourseLink(that.items[index].tableName).then((response) => {
 
           if (!response || response == "101") {
-            this.showNoCourse = true;
-            this.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
+            that.showNoCourse = true;
+            that.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
           } else {
-            this.course.push(this.items[index].tableName)
-            notifyCourse(this.course, this.objectId).then((response) => {
-              this.notifyItems()
+            that.course.push(that.items[index].tableName)
+            notifyCourse(that.course, that.objectId).then((response) => {
+              that.notifyItems()
 
-              this.showSuccess = true;
+              that.showSuccess = true;
 
-              if (this.course.length < 1) {
-                if (this.fromId)
-                  shareScuuess(this.fromId);  // 请求后台设置领取成功
+              if (that.course.length < 1) {
+                if (that.fromId)
+                  shareScuuess(that.fromId);  // 请求后台设置领取成功
               }
             }).catch((err) => {
               console.log(err)
