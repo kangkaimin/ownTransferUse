@@ -161,6 +161,7 @@
               that.tranArr = response.results.sort(that.sortMethod)
               that.notifyItems();
             }).catch((err) => {
+              alert("err:"+err.message);
               console.log(err)
             })
           })
