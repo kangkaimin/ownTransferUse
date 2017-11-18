@@ -157,7 +157,7 @@
             alert("getCourse");
             //获取课程信息
             getCourse().then((response) => {
-              alert("tranArr:"+tranArr.length);
+              alert("tranArr:"+that.tranArr.length);
               that.tranArr = response.results.sort(that.sortMethod)
               that.notifyItems();
             }).catch((err) => {
