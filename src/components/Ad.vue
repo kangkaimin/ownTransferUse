@@ -86,7 +86,7 @@
 //      this.screenHeight = window.innerHeight;
     },
     created() {
-      fromId = this.getUrlKey("state");
+      this.fromId = this.getUrlKey("state");
 
       let that = this
 
