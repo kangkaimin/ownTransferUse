@@ -341,7 +341,12 @@
           } else {
             that.course.push(that.items[index].tableName)
             alert("that.courseLinksMap - " + that.courseLinksMap);
-            that.courseLinksMap.set(that.items[index].tableName, response.result[0].courseLink)
+
+            try {
+              that.courseLinksMap.set(that.items[index].tableName, response.result[0].courseLink)
+            }catch (err){
+              alert(err.message)
+            }
 
             alert(that.items[index].tableName + " - " + response.result[0].courseLink)
 
