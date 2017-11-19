@@ -71,6 +71,7 @@
         screenHeight: window.innerHeight,
         userId: "001",
         course: [],
+        srcCourse: [],
         courseLinksMap: new Map(),
         shareCount: 0,
         tranArr: [],
@@ -147,6 +148,7 @@
 
             if (response.results.length > 0) {
 
+
               for (var c in response.results[0].course) {
                 var tranStr = c.split(that.splitTag);
                 if (tranStr.length > 1) {
@@ -155,6 +157,7 @@
                 that.course.push(tranStr[0]);
               }
 
+              that.srcCourse = response.results[0].course
               that.shareCount = response.results[0].shareCount
               that.objectId = response.results[0].objectId
               that.fromId = response.results[0].fromWhere
@@ -342,13 +345,14 @@
             that.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
           } else {
             that.course.push(that.items[index].tableName)
+            that.srcCourse.push(that.items[index].tableName+that.splitTag + response.courseLink)
 
             that.courseLinksMap.set(that.items[index].tableName, response.courseLink)
 
             alert(that.items[index].tableName + " - " + response.courseLink)
 
             if (that.objectId) {
-              notifyCourseByObjectId(that.course + that.splitTag + response.courseLink, that.objectId).then((response) => {
+              notifyCourseByObjectId(that.srcCourse, that.objectId).then((response) => {
                 that.notifyItems()
 
                 that.showSuccess = true;
@@ -361,7 +365,7 @@
                 console.log(err)
               })
             } else if (that.openId) {
-              notifyCourseByOpenId(that.course + that.splitTag + response.courseLink, that.openId).then((response) => {
+              notifyCourseByOpenId(that.srcCourse, that.openId).then((response) => {
                 that.notifyItems()
 
                 that.showSuccess = true;
