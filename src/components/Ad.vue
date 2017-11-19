@@ -296,7 +296,7 @@
       sortMethod(a, b) {
         return a.index - b.index
       },
-      goto() {ss---
+      goto() {
 
         alert(this.currentIndex+" "+this.course.length)
         if (this.currentIndex < this.course.length) {
