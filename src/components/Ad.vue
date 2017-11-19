@@ -300,12 +300,7 @@
 
         alert(this.currentIndex+" "+this.course.length)
         if (this.currentIndex < this.course.length) {
-          try {
-            alert(this.courseLinksMap.get(this.course[currentIndex]))
-            location.href = this.courseLinksMap.get(this.course[currentIndex]);
-          }catch (e){
-            alert(e.message);
-          }
+            location.href = this.courseLinksMap.get(this.course[this.currentIndex]);
         }
       },
       closeAllMask() {
