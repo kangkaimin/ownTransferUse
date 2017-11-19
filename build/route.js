@@ -200,7 +200,6 @@ router.get('/getCourseLink', function (req, res) {
       })
 
       return
-
     }
   }
 

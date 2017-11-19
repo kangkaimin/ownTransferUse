@@ -335,7 +335,7 @@
 
         getCourseLink(that.items[index].tableName).then((response) => {
 
-          alert(response.toString())
+          alert(response.courseLink)
 
           if (!response || response == "101") {
             that.showNoCourse = true;
@@ -343,12 +343,12 @@
           } else {
             that.course.push(that.items[index].tableName)
 
-            that.courseLinksMap.set(that.items[index].tableName, response)
+            that.courseLinksMap.set(that.items[index].tableName, response.courseLink)
 
-            alert(that.items[index].tableName + " - " + response)
+            alert(that.items[index].tableName + " - " + response.courseLink)
 
             if (that.objectId) {
-              notifyCourseByObjectId(that.course + that.splitTag + response, that.objectId).then((response) => {
+              notifyCourseByObjectId(that.course + that.splitTag + response.courseLink, that.objectId).then((response) => {
                 that.notifyItems()
 
                 that.showSuccess = true;
@@ -361,7 +361,7 @@
                 console.log(err)
               })
             } else if (that.openId) {
-              notifyCourseByOpenId(that.course, that.openId).then((response) => {
+              notifyCourseByOpenId(that.course + that.splitTag + response.courseLink, that.openId).then((response) => {
                 that.notifyItems()
 
                 that.showSuccess = true;
