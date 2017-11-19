@@ -300,6 +300,7 @@
         return a.index - b.index
       },
       goto() {
+        alert(this.currentIndex+ " "+this.course.length+" "+ this.courseLinksMap.get(this.course[this.currentIndex]))
         if (this.currentIndex < this.course.length) {
           location.href = this.courseLinksMap.get(this.course[this.currentIndex]);
         }
