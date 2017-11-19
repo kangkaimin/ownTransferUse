@@ -297,6 +297,8 @@
         return a.index - b.index
       },
       goto() {
+
+        alert(this.currentIndex+" "+this.course.length)
         if (this.currentIndex < this.course.length) {
           window.location.href = this.courseLinksMap.get(this.course[currentIndex]);
         }
