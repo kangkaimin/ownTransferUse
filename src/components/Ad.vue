@@ -148,13 +148,13 @@
 
             if (response.results.length > 0) {
 
-
               for (var c in response.results[0].course) {
                 var tranStr = c.split(that.splitTag);
                 if (tranStr.length > 1) {
                   that.courseLinksMap.set(tranStr[0], tranStr[1])
                 }
                 that.course.push(tranStr[0]);
+                alert(response.results[0].course[0])
                 alert(c)
                 alert(tranStr[0])
                 alert(tranStr[1])
