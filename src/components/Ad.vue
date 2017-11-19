@@ -155,7 +155,7 @@
                 }
                 that.course.push(tranStr[0]);
 
-                alert(tranStr)
+                alert(c.split(that.splitTag)[0])
                 alert(response.results[0].course[0])
                 alert(c)
                 alert(tranStr[0])
