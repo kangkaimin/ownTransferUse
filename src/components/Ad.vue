@@ -66,8 +66,8 @@
   export default {
     data() {
       return {
-        splitTag:"--link--",
-        currentIndex:0,
+        splitTag: "--link--",
+        currentIndex: 0,
         screenHeight: window.innerHeight,
         userId: "001",
         course: [],
@@ -147,9 +147,9 @@
 
             if (response.results.length > 0) {
 
-              for(var c in response.results[0].course){
+              for (var c in response.results[0].course) {
                 var tranStr = c.split(that.splitTag);
-                if (tranStr.length>1) {
+                if (tranStr.length > 1) {
                   that.courseLinksMap.set(tranStr[0], tranStr[1])
                 }
                 that.course.push(tranStr[0]);
@@ -294,8 +294,8 @@
         return a.index - b.index
       },
       goto() {
-        if (this.currentIndex<this.course.length){
-          window.location.href = this.courseLinksMap.get( this.course[currentIndex]);
+        if (this.currentIndex < this.course.length) {
+          window.location.href = this.courseLinksMap.get(this.course[currentIndex]);
         }
       },
       closeAllMask() {
@@ -340,12 +340,13 @@
             that.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
           } else {
             that.course.push(that.items[index].tableName)
+            alert("that.courseLinksMap - " + that.courseLinksMap);
             that.courseLinksMap.set(that.items[index].tableName, response.result[0].courseLink)
 
-            alert(that.items[index].tableName+" - "+response.result[0].courseLink)
+            alert(that.items[index].tableName + " - " + response.result[0].courseLink)
 
             if (that.objectId) {
-              notifyCourseByObjectId(that.course+that.splitTag+response.result[0].courseLink, that.objectId).then((response) => {
+              notifyCourseByObjectId(that.course + that.splitTag + response.result[0].courseLink, that.objectId).then((response) => {
                 that.notifyItems()
 
                 that.showSuccess = true;
