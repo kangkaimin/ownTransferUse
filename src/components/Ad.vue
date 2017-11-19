@@ -342,13 +342,8 @@
             that.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
           } else {
             that.course.push(that.items[index].tableName)
-            alert("that.courseLinksMap - " + that.courseLinksMap);
 
-            try {
-              that.courseLinksMap.set(that.items[index].tableName, response)
-            }catch (err){
-              alert(err.message)
-            }
+            that.courseLinksMap.set(that.items[index].tableName, response)
 
             alert(that.items[index].tableName + " - " + response)
 

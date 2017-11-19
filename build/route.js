@@ -180,6 +180,8 @@ router.get('/getCourseLink', function (req, res) {
     if (courseCanUsedArr && courseCanUsedArr.length > courseCanUsedIndex) {
 
       res.json(courseCanUsedArr[courseCanUsedIndex])
+      console.log("courseCanUsedArr[courseCanUsedIndex]):"+courseCanUsedIndex);
+      console.log(courseCanUsedArr[courseCanUsedIndex]);
 
       axios.put(baseUrl + "/" + courseCanUsedArr[courseCanUsedIndex].objectId, {
         "isUsed": true
