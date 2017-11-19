@@ -226,6 +226,8 @@ router.get('/getCourseLink', function (req, res) {
           "ind": 1
         })
 
+        console.log("response.data.results[0]:"+response.data.results[0]);
+        console.log(response.data.results[0]);
         res.json(response.data.results[0])
 
         axios.put(baseUrl + "/" + response.data.results[0].objectId, {
