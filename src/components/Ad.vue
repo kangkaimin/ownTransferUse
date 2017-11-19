@@ -300,7 +300,6 @@
         return a.index - b.index
       },
       goto() {
-        alert(this.currentIndex+ " "+this.course.length+" "+this.items[this.currentIndex].tableName+" "+ this.courseLinksMap.get(this.items[this.currentIndex].tableName))
         if (this.currentIndex < this.items.length) {
           location.href = this.courseLinksMap.get(this.items[this.currentIndex].tableName);
         }
