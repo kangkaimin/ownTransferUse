@@ -155,7 +155,9 @@
                   that.courseLinksMap.set(tranStr[0], tranStr[1])
                 }
                 that.course.push(tranStr[0]);
+                alert(c)
                 alert(tranStr[0])
+                alert(tranStr[1])
               }
 
               that.srcCourse = response.results[0].course
