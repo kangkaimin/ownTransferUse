@@ -299,10 +299,10 @@
       sortMethod(a, b) {
         return a.index - b.index
       },
-      goto() { 
-        alert(this.currentIndex+ " "+this.course.length+" "+this.items[this.currentIndex].name+" "+ this.courseLinksMap.get(this.items[this.currentIndex].name))
+      goto() {
+        alert(this.currentIndex+ " "+this.course.length+" "+this.items[this.currentIndex].tableName+" "+ this.courseLinksMap.get(this.items[this.currentIndex].tableName))
         if (this.currentIndex < this.items.length) {
-          location.href = this.courseLinksMap.get(this.items[this.currentIndex].name);
+          location.href = this.courseLinksMap.get(this.items[this.currentIndex].tableName);
         }
       },
       closeAllMask() {
