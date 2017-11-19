@@ -296,11 +296,16 @@
       sortMethod(a, b) {
         return a.index - b.index
       },
-      goto() {
+      goto() {ss---
 
         alert(this.currentIndex+" "+this.course.length)
         if (this.currentIndex < this.course.length) {
-          window.location.href = this.courseLinksMap.get(this.course[currentIndex]);
+          try {
+            alert(this.courseLinksMap.get(this.course[currentIndex]))
+            location.href = this.courseLinksMap.get(this.course[currentIndex]);
+          }catch (e){
+            alert(e.message);
+          }
         }
       },
       closeAllMask() {
