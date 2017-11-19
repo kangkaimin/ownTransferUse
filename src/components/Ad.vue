@@ -148,7 +148,11 @@
 
             if (response.results.length > 0) {
 
-              for (var c in response.results[0].course) {
+              var cou = response.results[0].course;
+
+              for (var i = 0; i < cou.length; i++) {
+
+                var c = cou[i]
                 var tranStr = c.split(that.splitTag);
                 if (tranStr.length > 1) {
                   that.courseLinksMap.set(tranStr[0], tranStr[1])
@@ -303,7 +307,7 @@
       },
       goto() {
         if (this.currentIndex < this.course.length) {
-            location.href = this.courseLinksMap.get(this.course[this.currentIndex]);
+          location.href = this.courseLinksMap.get(this.course[this.currentIndex]);
         }
       },
       closeAllMask() {
@@ -350,7 +354,7 @@
             that.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
           } else {
             that.course.push(that.items[index].tableName)
-            that.srcCourse.push(that.items[index].tableName+that.splitTag + response.courseLink)
+            that.srcCourse.push(that.items[index].tableName + that.splitTag + response.courseLink)
 
             that.courseLinksMap.set(that.items[index].tableName, response.courseLink)
 
