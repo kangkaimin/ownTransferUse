@@ -177,7 +177,7 @@ router.get('/getCourseLink', function (req, res) {
     var courseCanUsedArr = courseCanUsedMap.get(req.query.name).arr;
     var courseCanUsedIndex = courseCanUsedMap.get(req.query.name).ind;
 
-    if (courseCanUsedArr && courseCanUsedArr.length > 0) {
+    if (courseCanUsedArr && courseCanUsedArr.length > courseCanUsedIndex) {
 
       res.json(courseCanUsedArr[courseCanUsedIndex])
 
@@ -186,11 +186,12 @@ router.get('/getCourseLink', function (req, res) {
       }, {
         headers: theHeaders,
       }).then((response) => {
-        res.json(response.data)
+        // res.json(response.data)
       }).catch((err) => {
         console.log(err)
       })
 
+      courseCanUsedIndex = courseCanUsedIndex + 1;
       courseCanUsedMap.set(req.query.name, {
         "arr": courseCanUsedArr,
         "ind": courseCanUsedIndex

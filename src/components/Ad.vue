@@ -66,9 +66,12 @@
   export default {
     data() {
       return {
+        splitTag:"--link--",
+        currentIndex:0,
         screenHeight: window.innerHeight,
         userId: "001",
         course: [],
+        courseLinksMap: new Map(),
         shareCount: 0,
         tranArr: [],
         items: [],
@@ -143,7 +146,15 @@
           getUserInfo(that.openId).then((response) => {
 
             if (response.results.length > 0) {
-              that.course = response.results[0].course
+
+              for(var c in response.results[0].course){
+                var tranStr = c.split(that.splitTag);
+                if (tranStr.length>1) {
+                  that.courseLinksMap.set(tranStr[0], tranStr[1])
+                }
+                that.course.push(tranStr[0]);
+              }
+
               that.shareCount = response.results[0].shareCount
               that.objectId = response.results[0].objectId
               that.fromId = response.results[0].fromWhere
@@ -283,7 +294,9 @@
         return a.index - b.index
       },
       goto() {
-//        window.location.href = 'http://www.Baidu.com';
+        if (this.currentIndex<this.course.length){
+          window.location.href = this.courseLinksMap.get( this.course[currentIndex]);
+        }
       },
       closeAllMask() {
         this.showNoCourse = false;
@@ -307,6 +320,8 @@
 
         var that = this;
 
+        that.currentIndex = index;
+
         if (that.course.includes(that.items[index].tableName)) {
           that.showSuccess = true;
           return
@@ -325,9 +340,12 @@
             that.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
           } else {
             that.course.push(that.items[index].tableName)
+            that.courseLinksMap.set(that.items[index].tableName, response.result[0].courseLink)
+
+            alert(that.items[index].tableName+" - "+response.result[0].courseLink)
 
             if (that.objectId) {
-              notifyCourseByObjectId(that.course, that.objectId).then((response) => {
+              notifyCourseByObjectId(that.course+that.splitTag+response.result[0].courseLink, that.objectId).then((response) => {
                 that.notifyItems()
 
                 that.showSuccess = true;
