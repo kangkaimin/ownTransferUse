@@ -335,6 +335,8 @@
 
         getCourseLink(that.items[index].tableName).then((response) => {
 
+          alert(response)
+
           if (!response || response == "101") {
             that.showNoCourse = true;
             that.noCourseContent = "Oops,领取的人太多了，邀请码已经用光了。。。管理员正在补充，请稍后再试一下（如果超过24h还没好，请截图该页面，并在公众号后台发送并留言索取）！";
@@ -343,15 +345,15 @@
             alert("that.courseLinksMap - " + that.courseLinksMap);
 
             try {
-              that.courseLinksMap.set(that.items[index].tableName, response.results[0].courseLink)
+              that.courseLinksMap.set(that.items[index].tableName, response)
             }catch (err){
               alert(err.message)
             }
 
-            alert(that.items[index].tableName + " - " + response.results[0].courseLink)
+            alert(that.items[index].tableName + " - " + response)
 
             if (that.objectId) {
-              notifyCourseByObjectId(that.course + that.splitTag + response.results[0].courseLink, that.objectId).then((response) => {
+              notifyCourseByObjectId(that.course + that.splitTag + response, that.objectId).then((response) => {
                 that.notifyItems()
 
                 that.showSuccess = true;
