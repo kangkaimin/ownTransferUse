@@ -299,7 +299,7 @@
       sortMethod(a, b) {
         return a.index - b.index
       },
-      goto() {asd-----------------2
+      goto() { 
         alert(this.currentIndex+ " "+this.course.length+" "+this.items[this.currentIndex].name+" "+ this.courseLinksMap.get(this.items[this.currentIndex].name))
         if (this.currentIndex < this.items.length) {
           location.href = this.courseLinksMap.get(this.items[this.currentIndex].name);
