@@ -155,6 +155,7 @@
                   that.courseLinksMap.set(tranStr[0], tranStr[1])
                 }
                 that.course.push(tranStr[0]);
+                alert(tranStr[0])
               }
 
               that.srcCourse = response.results[0].course
@@ -297,8 +298,6 @@
         return a.index - b.index
       },
       goto() {
-
-        alert(this.currentIndex+" "+this.course.length)
         if (this.currentIndex < this.course.length) {
             location.href = this.courseLinksMap.get(this.course[this.currentIndex]);
         }
