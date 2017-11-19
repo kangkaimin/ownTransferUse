@@ -343,15 +343,15 @@
             alert("that.courseLinksMap - " + that.courseLinksMap);
 
             try {
-              that.courseLinksMap.set(that.items[index].tableName, response.result[0].courseLink)
+              that.courseLinksMap.set(that.items[index].tableName, response.results[0].courseLink)
             }catch (err){
               alert(err.message)
             }
 
-            alert(that.items[index].tableName + " - " + response.result[0].courseLink)
+            alert(that.items[index].tableName + " - " + response.results[0].courseLink)
 
             if (that.objectId) {
-              notifyCourseByObjectId(that.course + that.splitTag + response.result[0].courseLink, that.objectId).then((response) => {
+              notifyCourseByObjectId(that.course + that.splitTag + response.results[0].courseLink, that.objectId).then((response) => {
                 that.notifyItems()
 
                 that.showSuccess = true;
