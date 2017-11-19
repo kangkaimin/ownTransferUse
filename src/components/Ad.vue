@@ -286,7 +286,7 @@
         return parseInt(((this.shareCount+2) - this.course.length * 2 ) / 2)
       },
       unlockCount() {
-        return parseInt((this.shareCount ) / 2) + 1
+        return parseInt((this.shareCount ) / 2)
       }
     },
     components: {
@@ -341,7 +341,6 @@
 
         getCourseLink(that.items[index].tableName).then((response) => {
 
-          alert(response.courseLink)
 
           if (!response || response == "101") {
             that.showNoCourse = true;
@@ -352,7 +351,6 @@
 
             that.courseLinksMap.set(that.items[index].tableName, response.courseLink)
 
-            alert(that.items[index].tableName + " - " + response.courseLink)
 
             if (that.objectId) {
               notifyCourseByObjectId(that.srcCourse, that.objectId).then((response) => {
