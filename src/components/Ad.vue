@@ -158,12 +158,6 @@
                   that.courseLinksMap.set(tranStr[0], tranStr[1])
                 }
                 that.course.push(tranStr[0]);
-
-                alert(c.split(that.splitTag)[0])
-                alert(response.results[0].course[0])
-                alert(c)
-                alert(tranStr[0])
-                alert(tranStr[1])
               }
 
               that.srcCourse = response.results[0].course
@@ -289,7 +283,7 @@
     },
     computed: {
       freeCount() {
-        return parseInt((this.shareCount - this.course.length * 2 ) / 2) + 1
+        return parseInt(((this.shareCount+2) - this.course.length * 2 ) / 2)
       },
       unlockCount() {
         return parseInt((this.shareCount ) / 2) + 1
