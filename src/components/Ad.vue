@@ -335,7 +335,7 @@
 
         getCourseLink(that.items[index].tableName).then((response) => {
 
-          alert(response)
+          alert(response.toString())
 
           if (!response || response == "101") {
             that.showNoCourse = true;
