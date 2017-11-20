@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="height:{{height}}px">
     <router-view/>
   </div>
 </template>
@@ -10,7 +10,15 @@
 
   export default {
     name: 'app',
+    data(){
+      return{
+        height:0
+      }
+    },
     created() {
+
+      this.height = document.body.clientHeight;
+
 
 //      this.$router.push('/ad?id=123123')
 //      return
