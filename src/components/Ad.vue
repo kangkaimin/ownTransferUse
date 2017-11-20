@@ -148,9 +148,9 @@
           try {
             //获取个人信息asd
             getUserInfo(that.openId).then((response) => {
-
+              alert("getUserInfo --- response.results.length:"+response.results.length);
               if (response.results.length > 0) {
-
+                alert("getUserInfo --- 1");
                 var cou = response.results[0].course;
 
                 for (var i = 0; i < cou.length; i++) {
@@ -162,14 +162,17 @@
                   }
                   that.course.push(tranStr[0]);
                 }
-
+                alert("getUserInfo --- 2");
                 that.srcCourse = response.results[0].course
                 that.shareCount = response.results[0].shareCount
                 that.objectId = response.results[0].objectId
                 that.fromId = response.results[0].fromWhere
+                alert("getUserInfo --- 3");
               } else {
+                alert("getUserInfo --- 4");
                 createUserInfo(that.openId, that.fromId)
               }
+              alert("getUserInfo --- 5");
             }).catch((err) => {
               console.log(err)
             }).finally(function () {
