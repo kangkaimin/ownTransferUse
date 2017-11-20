@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="width:100px;height:100px;background:red;">
+  <div id="app" ref="app">
     <router-view/>
   </div>
 </template>
@@ -18,7 +18,7 @@
     created() {
 
       this.height = document.body.clientHeight;
-
+      this.$refs.app.style.height =  this.height+'px';
 
 //      this.$router.push('/ad?id=123123')
 //      return
