@@ -144,44 +144,50 @@
           });
 
           alert("getUserInfo --- 0");
-          //获取个人信息asd
-          getUserInfo(that.openId).then((response) => {
 
-            if (response.results.length > 0) {
+          try {
+            //获取个人信息asd
+            getUserInfo(that.openId).then((response) => {
 
-              var cou = response.results[0].course;
+              if (response.results.length > 0) {
 
-              for (var i = 0; i < cou.length; i++) {
+                var cou = response.results[0].course;
 
-                var c = cou[i]
-                var tranStr = c.split(that.splitTag);
-                if (tranStr.length > 1) {
-                  that.courseLinksMap.set(tranStr[0], tranStr[1])
+                for (var i = 0; i < cou.length; i++) {
+
+                  var c = cou[i]
+                  var tranStr = c.split(that.splitTag);
+                  if (tranStr.length > 1) {
+                    that.courseLinksMap.set(tranStr[0], tranStr[1])
+                  }
+                  that.course.push(tranStr[0]);
                 }
-                that.course.push(tranStr[0]);
+
+                that.srcCourse = response.results[0].course
+                that.shareCount = response.results[0].shareCount
+                that.objectId = response.results[0].objectId
+                that.fromId = response.results[0].fromWhere
+              } else {
+                createUserInfo(that.openId, that.fromId)
               }
-
-              that.srcCourse = response.results[0].course
-              that.shareCount = response.results[0].shareCount
-              that.objectId = response.results[0].objectId
-              that.fromId = response.results[0].fromWhere
-            } else {
-              createUserInfo(that.openId, that.fromId)
-            }
-          }).catch((err) => {
-            console.log(err)
-          }).finally(function () {
-
-            alert("getCourse --- 0");
-            //获取课程信息
-            getCourse().then((response) => {
-              that.tranArr = response.results.sort(that.sortMethod)
-              alert("getCourse --- " + that.tranArr.length);
-              that.notifyItems();
             }).catch((err) => {
               console.log(err)
+            }).finally(function () {
+
+              alert("getCourse --- 0");
+              //获取课程信息
+              getCourse().then((response) => {
+                that.tranArr = response.results.sort(that.sortMethod)
+                alert("getCourse --- " + that.tranArr.length);
+                that.notifyItems();
+              }).catch((err) => {
+                console.log(err)
+              })
             })
-          })
+
+          } catch (err) {
+            alert("msg --- :" + err.message);
+          }
 
 //          //获取参与人数领取数量
 //          getReceivePeopleAndNum().then((response) => {
@@ -286,7 +292,7 @@
     },
     computed: {
       freeCount() {
-        return parseInt(((this.shareCount+2) - this.course.length * 2 ) / 2)
+        return parseInt(((this.shareCount + 2) - this.course.length * 2 ) / 2)
       },
       unlockCount() {
         return parseInt((this.shareCount ) / 2)
