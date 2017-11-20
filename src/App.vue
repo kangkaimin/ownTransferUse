@@ -17,8 +17,8 @@
     },
     created() {
 
-      this.height = document.body.clientHeight;
-      this.$refs.app.style.height =  this.height+'px';
+//      this.height = document.body.clientHeight;
+//      this.$refs.app.style.height =  this.height+'px';
 
 //      this.$router.push('/ad?id=123123')
 //      return
