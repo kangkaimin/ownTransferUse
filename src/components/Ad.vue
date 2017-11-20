@@ -188,7 +188,7 @@
                   console.log(err)
                 })
               } catch (err) {
-                alert("msg --- :" + err.message);
+                alert("msg --- 1:" + err.message);
               }
             })
 
