@@ -175,22 +175,20 @@
               alert("getUserInfo --- 5");
             }).catch((err) => {
               console.log(err)
-            }).finally(function () {
-
-              try {
-                alert("getCourse --- 0");
-                //获取课程信息
-                getCourse().then((response) => {
-                  that.tranArr = response.results.sort(that.sortMethod)
-                  alert("getCourse --- " + that.tranArr.length);
-                  that.notifyItems();
-                }).catch((err) => {
-                  console.log(err)
-                })
-              } catch (err) {
-                alert("msg --- 1:" + err.message);
-              }
             })
+//              .finally(function () {
+
+            alert("getCourse --- 0");
+            //获取课程信息
+            getCourse().then((response) => {
+              that.tranArr = response.results.sort(that.sortMethod)
+              alert("getCourse --- " + that.tranArr.length);
+              that.notifyItems();
+            }).catch((err) => {
+              console.log(err)
+            })
+
+//            })
 
           } catch (err) {
             alert("msg --- :" + err.message);
