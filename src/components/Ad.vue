@@ -170,11 +170,11 @@
           }).catch((err) => {
             console.log(err)
           }).finally(function () {
-
+            alert("getCourse --- 0");
             //获取课程信息
             getCourse().then((response) => {
               that.tranArr = response.results.sort(that.sortMethod)
-              alert("getCourse --- ");
+              alert("getCourse --- " + that.tranArr.length);
               that.notifyItems();
             }).catch((err) => {
               console.log(err)
