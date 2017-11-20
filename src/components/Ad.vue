@@ -113,7 +113,7 @@
 //            }
 //          }).catch()
 //        }
-        alert("getJsapiTicket --- 0");
+
         that.openId = res.openid;
         getJsapiTicket(appId, appSecret).then((res) => {
 
@@ -143,14 +143,9 @@
             jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
           });
 
-          alert("getUserInfo --- 0");
-
-          try {
             //获取个人信息asd
             getUserInfo(that.openId).then((response) => {
-              alert("getUserInfo --- response.results.length:" + response.results.length);
               if (response.results.length > 0) {
-                alert("getUserInfo --- 1");
                 var cou = response.results[0].course;
 
                 for (var i = 0; i < cou.length; i++) {
@@ -162,37 +157,30 @@
                   }
                   that.course.push(tranStr[0]);
                 }
-                alert("getUserInfo --- 2");
+
                 that.srcCourse = response.results[0].course
                 that.shareCount = response.results[0].shareCount
                 that.objectId = response.results[0].objectId
                 that.fromId = response.results[0].fromWhere
-                alert("getUserInfo --- 3");
+
               } else {
-                alert("getUserInfo --- 4");
                 createUserInfo(that.openId, that.fromId)
               }
-              alert("getUserInfo --- 5");
+
             }).catch((err) => {
               console.log(err)
             })
 //              .finally(function () {
 
-            alert("getCourse --- 0");
             //获取课程信息
             getCourse().then((response) => {
               that.tranArr = response.results.sort(that.sortMethod)
-              alert("getCourse --- " + that.tranArr.length);
               that.notifyItems();
             }).catch((err) => {
               console.log(err)
             })
 
 //            })
-
-          } catch (err) {
-            alert("msg --- :" + err.message);
-          }
 
 //          //获取参与人数领取数量
 //          getReceivePeopleAndNum().then((response) => {
