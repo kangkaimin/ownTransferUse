@@ -113,7 +113,7 @@
 //            }
 //          }).catch()
 //        }
-
+        alert("getJsapiTicket --- 0");
         that.openId = res.openid;
         getJsapiTicket(appId, appSecret).then((res) => {
 
@@ -143,6 +143,7 @@
             jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
           });
 
+          alert("getUserInfo --- 0");
           //获取个人信息asd
           getUserInfo(that.openId).then((response) => {
 
@@ -170,6 +171,7 @@
           }).catch((err) => {
             console.log(err)
           }).finally(function () {
+
             alert("getCourse --- 0");
             //获取课程信息
             getCourse().then((response) => {
