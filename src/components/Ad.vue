@@ -148,7 +148,7 @@
           try {
             //获取个人信息asd
             getUserInfo(that.openId).then((response) => {
-              alert("getUserInfo --- response.results.length:"+response.results.length);
+              alert("getUserInfo --- response.results.length:" + response.results.length);
               if (response.results.length > 0) {
                 alert("getUserInfo --- 1");
                 var cou = response.results[0].course;
@@ -177,15 +177,19 @@
               console.log(err)
             }).finally(function () {
 
-              alert("getCourse --- 0");
-              //获取课程信息
-              getCourse().then((response) => {
-                that.tranArr = response.results.sort(that.sortMethod)
-                alert("getCourse --- " + that.tranArr.length);
-                that.notifyItems();
-              }).catch((err) => {
-                console.log(err)
-              })
+              try {
+                alert("getCourse --- 0");
+                //获取课程信息
+                getCourse().then((response) => {
+                  that.tranArr = response.results.sort(that.sortMethod)
+                  alert("getCourse --- " + that.tranArr.length);
+                  that.notifyItems();
+                }).catch((err) => {
+                  console.log(err)
+                })
+              } catch (err) {
+                alert("msg --- :" + err.message);
+              }
             })
 
           } catch (err) {
