@@ -87,8 +87,8 @@
   #coursediv {
     margin-right: 20px;
     margin-left: 20px;
-    padding-bottom: 15px;
-    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     display: flex;
     justify-content: space-between;
     font-size: 16px;
