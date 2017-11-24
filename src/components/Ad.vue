@@ -404,11 +404,11 @@
   }
 
   #header{
-    width: 100%;
-    height: 120px;
-    background: #0f0;
+    /*width: 100%;*/
+    /*height: 120px;*/
+    /*background: #0f0;*/
   }
-  
+
   #header_bg_green {
     position: relative;
     width: 100%;
