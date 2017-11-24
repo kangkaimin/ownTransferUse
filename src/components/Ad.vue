@@ -399,7 +399,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #0ff;
+    /*background-color: #0ff;*/
   }
 
   #header_bg_green {
