@@ -7,9 +7,10 @@
       <img id="header_banner" src="../assets/photo.png"/>
     </div>
 
-    <p style="font-size: 18px;padding: 0px;margin-top:100px;margin-bottom:0px;margin-right:20px;margin-left: 20px">还可以免费领取<span
-      style="color: #15ccad;">{{freeCount}}</span>套</p>
+
     <div id="content" ref="content">
+      <p style="font-size: 18px;padding: 0px;margin-top:0px;margin-bottom:0px;margin-right:20px;margin-left: 20px">还可以免费领取<span
+        style="color: #15ccad;">{{freeCount}}</span>套</p>
       <ul style="padding: 0px;margin: 0px;">
         <li v-for="(item, index) in items" style="list-style-type:none;">
           <courseitem :index="index" :title="item.name" :courseState="item.courseState"
