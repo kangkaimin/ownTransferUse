@@ -285,7 +285,7 @@
       this.$refs.content.style.height = (this.screenHeight - this.$refs.header.clientHeight - this.$refs.footer.clientHeight) + 'px';
 
 //      alert(this.$refs.header.clientHeight+' - '+ this.$refs.header.offsetHeight+' - '+this.$refs.header.style.height +" "+this.$refs.header.clientHeight)
-      alert(headerHeight+' - '+ footerHeight+' - '+(this.screenHeight - this.$refs.header.clientHeight - this.$refs.footer.clientHeight))
+//      alert(headerHeight+' - '+ footerHeight+' - '+(this.screenHeight - this.$refs.header.clientHeight - this.$refs.footer.clientHeight))
 
     },
     computed: {
@@ -434,7 +434,7 @@
 
   #header_banner {
     width: 100%;
-    height: 60px;
+    height: 70px;
   }
 
   #content {
