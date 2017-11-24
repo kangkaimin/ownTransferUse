@@ -7,7 +7,7 @@
       <img id="header_banner" src="../assets/photo.png"/>
     </div>
 
-    <p style="font-size: 18px;padding: 0px;margin-top:0px;margin-bottom:0px;margin-right:20px;margin-left: 20px">还可以免费领取<span
+    <p style="font-size: 18px;padding: 0px;margin-top:100px;margin-bottom:0px;margin-right:20px;margin-left: 20px">还可以免费领取<span
       style="color: #15ccad;">{{freeCount}}</span>套</p>
     <div id="content" ref="content">
       <ul style="padding: 0px;margin: 0px;">
