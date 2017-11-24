@@ -284,7 +284,7 @@
 //      this.$refs.bodydiv.style.height = this.screenHeight + 'px';
       this.$refs.content.style.height = (this.screenHeight - headerHeight - footerHeight - 30) + 'px';
 
-      alert(headerHeight+' - '+ footerHeight+' - '+(this.screenHeight - headerHeight - footerHeight - 30))
+      alert(this.$refs.header.clientHeight+' - '+ this.$refs.header.offsetHeight+' - '+this.$refs.header.style.height +" "+this.$refs.header.clientHeight)
 
     },
     computed: {
