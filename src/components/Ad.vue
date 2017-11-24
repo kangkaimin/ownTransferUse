@@ -277,8 +277,8 @@
     },
     mounted() {
       let bodydivHeight = document.documentElement.clientHeight;
-      let headerHeight = this.$refs.header.style.height;
-      let footerHeight = this.$refs.footer.style.height;
+      let headerHeight = this.$refs.header.clientHeight;
+      let footerHeight = this.$refs.footer.clientHeight;
 
       this.$refs.bodydiv.style.height = this.screenHeight + 'px';
 //      this.$refs.bodydiv.style.height = this.screenHeight + 'px';
