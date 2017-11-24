@@ -430,6 +430,7 @@
   #content {
     width: 100%;
     overflow: scroll;
+    background-color: #00f;
   }
 
   #footer {
