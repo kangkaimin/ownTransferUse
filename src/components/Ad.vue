@@ -5,7 +5,7 @@
         <p id="header_title">活动页</p>
       </div>
       <img id="header_banner" src="../assets/photo.png"/>
-      <p style="font-size: 18px;padding: 0px;margin-top:0px;margin-bottom:0px;margin-right:20px;margin-left: 20px;height: 30px;background-color:blue ">还可以免费领取<span
+      <p style="font-size: 18px;padding: 0px;margin-top:0px;margin-bottom:0px;margin-right:20px;margin-left: 20px;height: 30px;">还可以免费领取<span
         style="color: #15ccad;">{{freeCount}}</span>套</p>
     </div>
 
@@ -436,7 +436,6 @@
   #content {
     width: 100%;
     overflow: scroll;
-    background-color: red;
   }
 
   #footer {
