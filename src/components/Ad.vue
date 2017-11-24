@@ -400,7 +400,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #0ff;
   }
 
   #header{
@@ -436,7 +435,6 @@
   #content {
     width: 100%;
     overflow: scroll;
-    background-color: #00f;
   }
 
   #footer {
