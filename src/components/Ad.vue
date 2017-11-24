@@ -5,12 +5,12 @@
         <p id="header_title">活动页</p>
       </div>
       <img id="header_banner" src="../assets/photo.png"/>
-    </div>
-
-
-    <div id="content" ref="content">
       <p style="font-size: 18px;padding: 0px;margin-top:0px;margin-bottom:0px;margin-right:20px;margin-left: 20px">还可以免费领取<span
         style="color: #15ccad;">{{freeCount}}</span>套</p>
+    </div>
+
+    <div id="content" ref="content">
+
       <ul style="padding: 0px;margin: 0px;">
         <li v-for="(item, index) in items" style="list-style-type:none;">
           <courseitem :index="index" :title="item.name" :courseState="item.courseState"
@@ -144,42 +144,42 @@
             jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
           });
 
-            //获取个人信息asd
-            getUserInfo(that.openId).then((response) => {
-              if (response.results.length > 0) {
-                var cou = response.results[0].course;
+          //获取个人信息asd
+          getUserInfo(that.openId).then((response) => {
+            if (response.results.length > 0) {
+              var cou = response.results[0].course;
 
-                for (var i = 0; i < cou.length; i++) {
+              for (var i = 0; i < cou.length; i++) {
 
-                  var c = cou[i]
-                  var tranStr = c.split(that.splitTag);
-                  if (tranStr.length > 1) {
-                    that.courseLinksMap.set(tranStr[0], tranStr[1])
-                  }
-                  that.course.push(tranStr[0]);
+                var c = cou[i]
+                var tranStr = c.split(that.splitTag);
+                if (tranStr.length > 1) {
+                  that.courseLinksMap.set(tranStr[0], tranStr[1])
                 }
-
-                that.srcCourse = response.results[0].course
-                that.shareCount = response.results[0].shareCount
-                that.objectId = response.results[0].objectId
-                that.fromId = response.results[0].fromWhere
-
-              } else {
-                createUserInfo(that.openId, that.fromId)
+                that.course.push(tranStr[0]);
               }
 
-            }).catch((err) => {
-              console.log(err)
-            })
+              that.srcCourse = response.results[0].course
+              that.shareCount = response.results[0].shareCount
+              that.objectId = response.results[0].objectId
+              that.fromId = response.results[0].fromWhere
+
+            } else {
+              createUserInfo(that.openId, that.fromId)
+            }
+
+          }).catch((err) => {
+            console.log(err)
+          })
 //              .finally(function () {
 
-            //获取课程信息
-            getCourse().then((response) => {
-              that.tranArr = response.results.sort(that.sortMethod)
-              that.notifyItems();
-            }).catch((err) => {
-              console.log(err)
-            })
+          //获取课程信息
+          getCourse().then((response) => {
+            that.tranArr = response.results.sort(that.sortMethod)
+            that.notifyItems();
+          }).catch((err) => {
+            console.log(err)
+          })
 
 //            })
 
@@ -281,7 +281,8 @@
       let footerHeight = this.$refs.footer.offsetHeight;
 
       this.$refs.bodydiv.style.height = this.screenHeight + 'px';
-      this.$refs.content.style.height = (this.screenHeight - headerHeight - footerHeight - 1000) + 'px';
+//      this.$refs.bodydiv.style.height = this.screenHeight + 'px';
+      this.$refs.content.style.height = (this.screenHeight - headerHeight - footerHeight) + 'px';
 
     },
     computed: {
@@ -402,7 +403,7 @@
     justify-content: space-between;
   }
 
-  #header{
+  #header {
     /*width: 100%;*/
     /*height: 120px;*/
     /*background: #0f0;*/
