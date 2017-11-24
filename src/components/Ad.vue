@@ -279,7 +279,7 @@
       let headerHeight = this.$refs.header.offsetHeight;
       let footerHeight = this.$refs.footer.offsetHeight;
 
-      this.$refs.bodydiv.style.height = 100 + 'px';
+      this.$refs.bodydiv.style.height = 300 + 'px';
       this.$refs.content.style.height = (this.screenHeight - headerHeight - footerHeight) + 'px';
 
     },
