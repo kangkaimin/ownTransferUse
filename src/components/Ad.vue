@@ -68,7 +68,7 @@
       return {
         splitTag: "--link--",
         currentIndex: 0,
-        screenHeight: window.innerHeight,
+        screenHeight: document.documentElement.clientHeight,
         userId: "001",
         course: [],
         srcCourse: [],
