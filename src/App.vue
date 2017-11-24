@@ -62,6 +62,5 @@
 
 <style>
   #app {
-    background-color: #00f;
   }
 </style>
