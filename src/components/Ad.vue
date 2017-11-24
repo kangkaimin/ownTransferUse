@@ -275,11 +275,11 @@
 
     },
     mounted() {
-      let bodydivHeight = this.$refs.bodydiv.offsetHeight;
+      let bodydivHeight = document.documentElement.clientHeight;
       let headerHeight = this.$refs.header.offsetHeight;
       let footerHeight = this.$refs.footer.offsetHeight;
 
-      this.$refs.bodydiv.style.height = 300 + 'px';
+      this.$refs.bodydiv.style.height = this.screenHeight + 'px';
       this.$refs.content.style.height = (this.screenHeight - headerHeight - footerHeight) + 'px';
 
     },
