@@ -281,7 +281,7 @@
       let footerHeight = this.$refs.footer.offsetHeight;
 
       this.$refs.bodydiv.style.height = this.screenHeight + 'px';
-      this.$refs.content.style.height = (this.screenHeight - headerHeight - footerHeight - 100) + 'px';
+      this.$refs.content.style.height = (this.screenHeight - headerHeight - footerHeight - 1000) + 'px';
 
     },
     computed: {
@@ -400,7 +400,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /*background-color: #0ff;*/
+    background-color: #0ff;
   }
 
   #header{
