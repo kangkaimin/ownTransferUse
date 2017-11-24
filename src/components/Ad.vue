@@ -282,7 +282,7 @@
 
       this.$refs.bodydiv.style.height = this.screenHeight + 'px';
 //      this.$refs.bodydiv.style.height = this.screenHeight + 'px';
-      this.$refs.content.style.height = (this.screenHeight - this.$refs.header.clientHeight - this.$refs.footer.clientHeight) + 'px';
+      this.$refs.content.style.height = (this.screenHeight - this.$refs.header.clientHeight - this.$refs.footer.clientHeight - 30) + 'px';
 
 //      alert(this.$refs.header.clientHeight+' - '+ this.$refs.header.offsetHeight+' - '+this.$refs.header.style.height +" "+this.$refs.header.clientHeight)
       alert(headerHeight+' - '+ footerHeight+' - '+(this.screenHeight - this.$refs.header.clientHeight - this.$refs.footer.clientHeight))
