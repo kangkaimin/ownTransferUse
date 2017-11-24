@@ -393,7 +393,7 @@
 
   #div {
     position: relative;
-    height: 0px;
+    height: 100px;
     width: 100%;
     /*font-size:0;*/
     display: flex;
