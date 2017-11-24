@@ -279,7 +279,7 @@
       let headerHeight = this.$refs.header.offsetHeight;
       let footerHeight = this.$refs.footer.offsetHeight;
 
-      this.$refs.bodydiv.style.height = this.screenHeight + 'px';
+      this.$refs.bodydiv.style.height = 100 + 'px';
       this.$refs.content.style.height = (this.screenHeight - headerHeight - footerHeight) + 'px';
 
     },
@@ -393,7 +393,7 @@
 
   #div {
     position: relative;
-    height: 100px;
+    height: 0px;
     width: 100%;
     /*font-size:0;*/
     display: flex;
